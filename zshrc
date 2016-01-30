@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/nhess/.oh-my-zsh
+export ZSH=/Users/nickhess/.oh-my-zsh
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -52,7 +52,7 @@ ZSH_THEME="robbyrussell"
 plugins=(git github brew osx sublime)
 
 # User configuration
-DEFAULT_USER="nhess"
+DEFAULT_USER="nickhess"
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -87,6 +87,6 @@ alias st="open -a 'Sublime Text'"
 alias code="cd ~/code"
 export GIT_EDITOR="vim"
 
-export NVM_DIR="/Users/nhess/.nvm"
+export NVM_DIR="/Users/nickhess/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-export PACKAGE_DIRS="/Users/nhess/Code/meteor/packages"
+export PACKAGE_DIRS="/Users/nickhess/Code/meteor/packages"
