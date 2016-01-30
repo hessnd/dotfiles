@@ -1,10 +1,11 @@
 execute pathogen#infect()
-syntax on
+syntax enable
 filetype plugin indent on
 set number
 set showmatch
 colorscheme badwolf
 let g:badwolf_darkgutter=1
+set showcmd
 
 set wildmenu
 set wildmode=longest:list,full
@@ -39,5 +40,10 @@ set tabstop=2
 
 set ai "Auto indent
 set si "Smart indent
+
+" NerdTree
+map <C-n> :NERDTreeToggle<CR>
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 
