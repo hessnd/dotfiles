@@ -4,8 +4,8 @@ export ZSH=/Users/nickhess/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="agnoster"
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="miloshadzic"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -63,11 +63,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -85,8 +85,10 @@ alias zshconfig="vim ~/.dotfiles/zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias st="open -a 'Sublime Text'"
 alias code="cd ~/code"
+alias bss="cd ~/code/bigspaceship"
 export GIT_EDITOR="vim"
 
-export NVM_DIR="/Users/nickhess/.nvm"
+export NVM_DIR="~/.nvm"
+source $(brew --prefix nvm)/nvm.sh
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-export PACKAGE_DIRS="/Users/nickhess/Code/meteor/packages"
+export PACKAGE_DIRS="/Users/nickhess/Code/bigspaceship/meteor/packages"
