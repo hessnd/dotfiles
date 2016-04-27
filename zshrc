@@ -63,11 +63,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -85,10 +85,12 @@ alias zshconfig="vim ~/.dotfiles/zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias st="open -a 'Sublime Text'"
 alias code="cd ~/code"
+alias bss="cd ~/code/bigspaceship"
 export GIT_EDITOR="vim"
 
-export NVM_DIR="/Users/nickhess/.nvm"
+export NVM_DIR="~/.nvm"
+source $(brew --prefix nvm)/nvm.sh
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-export PACKAGE_DIRS="/Users/nickhess/Code/meteor/packages"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PACKAGE_DIRS="/Users/nickhess/Code/bigspaceship/meteor/packages"
