@@ -18,6 +18,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'wincent/command-t'
 Plugin 'sjl/badwolf'
+Plugin 'tomtom/tcomment_vim'
 
 
 " All of your Plugins must be added before the following line
@@ -88,6 +89,28 @@ set tabstop=2
 
 set ai "Auto indent
 set si "Smart indent
+
+" Always Show current position
+set ruler
+
+"Window Management
+map <leader>j <C-W>j
+map <leader>k <C-W>k
+map <leader>h <C-W>h
+map <leader>l <C-W>l
+map <leader>s <C-W>s
+map <leader>v <C-W>v
+map <leader>+ <C-W>>
+map <leader>- <C-W>>
+
+" Nerd Tree shortcuts
+map <leader>\ :NERDTreeToggle<cr>
+
+" CtrlP Settings
+let g:ctrlp_working_path_mode = 'ra'
+
+" tComment Settings
+map <leader>/ gc
 
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
