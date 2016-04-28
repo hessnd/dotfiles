@@ -105,7 +105,7 @@ map <leader>- <C-W>>
 
 " Complete brackets and parentheses
 inoremap {     {}<Left>
-inoremap {<CR> {<CR}<Esc>O
+inoremap {<CR> {<CR>}<Esc>O
 inoremap {{    {
 inoremap {}    {}
 inoremap (     ()<Left>
