@@ -103,6 +103,13 @@ map <leader>v <C-W>v
 map <leader>+ <C-W>>
 map <leader>- <C-W>>
 
+" Complete brackets and parentheses
+inoremap {     {}<Left>
+inoremap {<CR> {<CR}<Esc>O
+inoremap {{    {
+inoremap {}    {}
+inoremap (     ()<Left>
+
 " Nerd Tree shortcuts
 map <leader>\ :NERDTreeToggle<cr>
 
