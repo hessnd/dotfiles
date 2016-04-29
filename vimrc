@@ -19,7 +19,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'wincent/command-t'
 Plugin 'sjl/badwolf'
 Plugin 'tomtom/tcomment_vim'
-
+Plugin 'flazz/vim-colorschemes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -46,8 +46,7 @@ set number
 set showmatch
 
 " Color Scheme
-colorscheme badwolf
-let g:badwolf_darkgutter=1
+colorscheme molokai
 set showcmd
 
 " Turn Backkup off
