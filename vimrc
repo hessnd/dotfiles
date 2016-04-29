@@ -71,6 +71,11 @@ set hlsearch
 " Make search act like search in modern browsers
 set incsearch
 
+" Fast saving
+map <leader>w :w!<cr>
+" Fast quitting
+map <leader>q :q!<cr>
+
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
@@ -92,6 +97,12 @@ set si "Smart indent
 
 " Always Show current position
 set ruler
+
+"Reload files changed outside vim
+set autoread
+
+" Wrap lines at convenient points
+set linebreak
 
 "Window Management
 map <leader>j <C-W>j
