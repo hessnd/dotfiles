@@ -123,6 +123,8 @@ inoremap (     ()<Left>
 
 " Nerd Tree shortcuts
 map <leader>\ :NERDTreeToggle<cr>
+" Close vim if Nerd Tree is the only thing left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " CtrlP Settings
 let g:ctrlp_working_path_mode = 'ra'
