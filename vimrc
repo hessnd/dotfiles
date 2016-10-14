@@ -23,6 +23,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'ap/vim-css-color'
 Plugin 'posva/vim-vue'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'wakatime/vim-wakatime'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -130,6 +131,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " CtrlP Settings
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " tComment Settings
 map <leader>/ gc
