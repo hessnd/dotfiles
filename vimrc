@@ -131,6 +131,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " CtrlP Settings
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " tComment Settings
 map <leader>/ gc

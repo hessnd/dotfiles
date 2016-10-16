@@ -1,10 +1,9 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/nickhess/.oh-my-zsh
+export ZSH=/Users/nhess/.oh-my-zsh
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="robbyrussell"
 ZSH_THEME="miloshadzic"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -52,7 +51,7 @@ ZSH_THEME="miloshadzic"
 plugins=(git github brew osx sublime zsh-wakatime)
 
 # User configuration
-DEFAULT_USER="nickhess"
+DEFAULT_USER="nhess"
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -93,4 +92,7 @@ source $(brew --prefix nvm)/nvm.sh
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PACKAGE_DIRS="/Users/nickhess/Code/meteor/packages"
+export PACKAGE_DIRS="/Users/nhess/Code/meteor/packages"
+
+#PHP version
+export PATH=/usr/local/php5/bin:$PATH
