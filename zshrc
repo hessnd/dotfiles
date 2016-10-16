@@ -88,7 +88,6 @@ alias dotfiles="cd ~/.dotfiles"
 export GIT_EDITOR="vim"
 
 export NVM_DIR="~/.nvm"
-source $(brew --prefix nvm)/nvm.sh
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
