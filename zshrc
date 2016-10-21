@@ -85,6 +85,7 @@ alias zshconfig="vim ~/.dotfiles/zshrc"
 alias st="open -a 'Sublime Text'"
 alias code="cd ~/code"
 alias dotfiles="cd ~/.dotfiles"
+alias apps="cd /Applications"
 export GIT_EDITOR="vim"
 
 export NVM_DIR="~/.nvm"
