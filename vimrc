@@ -124,6 +124,10 @@ inoremap {{    {
 inoremap {}    {}
 inoremap (     ()<Left>
 
+" Use Ctrl-c to copy and Ctrl-v to paste
+vnoremap <C-c> :w !pbcopy<CR><CR>
+noremap <C-v> :r !pbpaste<CR><CR>
+
 " Nerd Tree shortcuts
 map <leader>\ :NERDTreeToggle<cr>
 " Close vim if Nerd Tree is the only thing left
