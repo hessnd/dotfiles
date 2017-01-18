@@ -23,6 +23,7 @@ Plugin 'ap/vim-css-color'
 Plugin 'posva/vim-vue'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'wakatime/vim-wakatime'
+Plugin 'w0ng/vim-hybrid'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -49,7 +50,10 @@ set number
 set showmatch
 
 " Color Scheme
-colorscheme molokai
+set background=dark
+colorscheme hybrid
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1
 set showcmd
 
 " Turn Backkup off
