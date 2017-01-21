@@ -24,6 +24,7 @@ Plugin 'posva/vim-vue'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'w0ng/vim-hybrid'
+Plugin 'ryanoasis/vim-devicons'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -151,4 +152,5 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "Vim Airline
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
+" set guifont=DroidSansMonoforPowerline:h12
 let g:airline_powerline_fonts=1
