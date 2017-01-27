@@ -102,6 +102,10 @@ set tabstop=2
 set ai "Auto indent
 set si "Smart indent
 
+" move text and rehighlight
+vnoremap > ><CR>gv
+vnoremap < <<CR>gv
+
 " Always Show current position
 set ruler
 
@@ -142,10 +146,6 @@ inoremap (     ()<Left>
 " Use Ctrl-c to copy and Ctrl-v to paste
 vnoremap <C-c> :w !pbcopy<CR><CR>
 noremap <C-v> :r !pbpaste<CR><CR>
-
-" Auto indent pasted text
-nnoremap p p=`]<C-o>
-nnoremap P P=`]<C-o>
 
 " Nerd Tree shortcuts
 map <leader>\ :NERDTreeToggle<cr>
