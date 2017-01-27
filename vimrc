@@ -121,6 +121,17 @@ map <leader>v <C-W>v
 map <leader>+ <C-W>>
 map <leader>- <C-W>>
 
+" Open new splits easily
+map vv <C-W>v
+map ss <C-w>s
+map Q <C-W>q
+
+" Open splits on the right and below
+set splitbelow
+set splitright
+
+autocmd VimResized * wincmd = " Automatically resize splits when resizing window
+
 " Complete brackets and parentheses
 inoremap {     {}<Left>
 inoremap {<CR> {<CR>}<Esc>O
@@ -131,6 +142,10 @@ inoremap (     ()<Left>
 " Use Ctrl-c to copy and Ctrl-v to paste
 vnoremap <C-c> :w !pbcopy<CR><CR>
 noremap <C-v> :r !pbpaste<CR><CR>
+
+" Auto indent pasted text
+nnoremap p p=`]<C-o>
+nnoremap P P=`]<C-o>
 
 " Nerd Tree shortcuts
 map <leader>\ :NERDTreeToggle<cr>
