@@ -78,6 +78,14 @@ set hlsearch
 " Make search act like search in modern browsers
 set incsearch
 
+" This makes vim act like all other editors, buffers can
+" exist in the background without being in a window.
+" http://items.sjbach.com/319/configuring-vim-right
+set hidden
+
+" Keep 5 lines below and above the cursor
+set scrolloff=3
+
 " Fast saving
 map <leader>w :w!<cr>
 " Fast quitting
