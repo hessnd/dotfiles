@@ -18,13 +18,15 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'wincent/command-t'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'flazz/vim-colorschemes'
 Plugin 'ap/vim-css-color'
 Plugin 'posva/vim-vue'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'tpope/vim-surround'
+Plugin 'mattn/emmet-vim'
+Plugin 'xuyuanp/nerdtree-git-plugin'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -61,6 +63,13 @@ set showcmd
 set nobackup
 set nowb
 set noswapfile
+
+" Persistent Undo
+if has('persistent_undo')
+  silent !mkdir ~/.vim/backups > /dev/null 2>&1
+  set undodir=~/.vim/backups
+  set undofile
+endif
 
 " Autocomplete Menu
 set wildmenu
@@ -107,12 +116,8 @@ set smarttab
 set shiftwidth=2
 set tabstop=2
 
-set ai "Auto indent
-set si "Smart indent
-
-" move text and rehighlight
-vnoremap > ><CR>gv
-vnoremap < <<CR>gv
+set autoindent "Auto indent
+set smartindent "Smart indent
 
 " Always Show current position
 set ruler
