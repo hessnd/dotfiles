@@ -27,6 +27,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'tpope/vim-surround'
 Plugin 'mattn/emmet-vim'
 Plugin 'xuyuanp/nerdtree-git-plugin'
+Plugin 'yggdroot/indentline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
