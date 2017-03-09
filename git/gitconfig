@@ -1,0 +1,25 @@
+[core]
+  editor = vim
+
+[push]
+  default = simple
+
+[user]
+  name = hessnd
+  email = n.hess@bigspaceship.com
+
+[color]
+  ui = true
+
+[color "branch"]
+  current = green reverse
+  local = green
+  remote = blue
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red
+  new = green
+
+dsf = "!git diff --color$@ | diff-so-fancy"
