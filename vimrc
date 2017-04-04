@@ -147,6 +147,9 @@ map Q <C-W>q
 set splitbelow
 set splitright
 
+" Load all buffers and prompt for number to go to
+nnoremap gb :ls<CR>:b<Space>
+
 autocmd VimResized * wincmd = " Automatically resize splits when resizing window
 
 " Complete brackets and parentheses

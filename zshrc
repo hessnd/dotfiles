@@ -94,6 +94,6 @@ export NVM_DIR="~/.nvm"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PACKAGE_DIRS="/Users/nhess/Code/meteor/packages"
-
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 #PHP version
 export PATH=/usr/local/php5/bin:$PATH
