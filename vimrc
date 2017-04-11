@@ -49,6 +49,9 @@ syntax on
 " Set Line Numbers
 set number
 
+" make backspace work like most other apps
+set backspace=2
+
 " Show matching brackets when hovering over
 set showmatch
 
