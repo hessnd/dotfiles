@@ -16,7 +16,6 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'wincent/command-t'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'ap/vim-css-color'
 Plugin 'posva/vim-vue'
@@ -155,6 +154,10 @@ nnoremap gb :ls<CR>:b<Space>
 
 autocmd VimResized * wincmd = " Automatically resize splits when resizing window
 
+" Suffix .js for imports and using gf
+set suffixesadd+=.js
+set path+=$PWD/node_modules
+
 " Complete brackets and parentheses
 inoremap {     {}<Left>
 inoremap {<CR> {<CR>}<Esc>O
@@ -166,6 +169,25 @@ inoremap (     ()<Left>
 vnoremap <C-c> :w !pbcopy<CR><CR>
 noremap <C-v> :r !pbpaste<CR><CR>
 
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" bind | to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Ag<SPACE>
+
 " Nerd Tree shortcuts
 map <leader>\ :NERDTreeToggle<cr>
 " Close vim if Nerd Tree is the only thing left
@@ -173,7 +195,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " CtrlP Settings
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " tComment Settings
 map <leader>/ gc
