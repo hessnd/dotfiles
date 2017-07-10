@@ -158,6 +158,9 @@ autocmd VimResized * wincmd = " Automatically resize splits when resizing window
 set suffixesadd+=.js
 set path+=$PWD/node_modules
 
+" Automatically set correct Vue Syntax highlighting
+autocmd FileType vue syntax sync fromstart
+
 " Complete brackets and parentheses
 inoremap {     {}<Left>
 inoremap {<CR> {<CR>}<Esc>O
