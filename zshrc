@@ -88,6 +88,9 @@ alias code="cd ~/code"
 alias dotfiles="cd ~/.dotfiles"
 alias apps="cd /Applications"
 export GIT_EDITOR="vim"
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+
+eval "$(rbenv init -)"
 
 export NVM_DIR="~/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -97,3 +100,4 @@ export PACKAGE_DIRS="/Users/nhess/Code/meteor/packages"
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 #PHP version
 export PATH=/usr/local/php5/bin:$PATH
+export PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
