@@ -101,3 +101,6 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 #PHP version
 export PATH=/usr/local/php5/bin:$PATH
 export PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
+
+# added by travis gem
+[ -f /Users/nhess/.travis/travis.sh ] && source /Users/nhess/.travis/travis.sh

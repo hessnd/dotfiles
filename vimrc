@@ -211,3 +211,6 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 let g:airline_powerline_fonts=1
+
+" Not have weird lien of text at beginnning of fim in hyper terminal
+set t_RV=
