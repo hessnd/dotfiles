@@ -26,6 +26,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'mattn/emmet-vim'
 Plugin 'xuyuanp/nerdtree-git-plugin'
 Plugin 'yggdroot/indentline'
+Plugin 'mxw/vim-jsx'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -212,5 +213,8 @@ let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 let g:airline_powerline_fonts=1
 
-" Not have weird lien of text at beginnning of fim in hyper terminal
+" Not have weird line of text at beginnning of fim in hyper terminal
 set t_RV=
+
+" Allow jsx syntax in js files
+let g:jsx_ext_required = 0
