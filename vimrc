@@ -27,6 +27,10 @@ Plugin 'mattn/emmet-vim'
 Plugin 'xuyuanp/nerdtree-git-plugin'
 Plugin 'yggdroot/indentline'
 Plugin 'mxw/vim-jsx'
+Plugin 'sbdchd/neoformat'
+Plugin 'w0rp/ale'
+Plugin 'prettier/vim-prettier'
+Plugin 'alampros/vim-styled-jsx'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -218,3 +222,14 @@ set t_RV=
 
 " Allow jsx syntax in js files
 let g:jsx_ext_required = 0
+
+" Ale settings
+let g:ale_linters = {}
+let g:ale_linters['javascript'] = ['eslint']
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_javascript_prettier_options = '--trailing-comma'
+
+" Prettier Settings
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#parser = 'babylon'
