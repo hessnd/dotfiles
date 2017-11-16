@@ -30,6 +30,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'w0rp/ale'
 Plugin 'prettier/vim-prettier'
 Plugin 'alampros/vim-styled-jsx'
+Plugin 'crusoexia/vim-javascript-lib'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -61,6 +62,7 @@ set showmatch
 " Color Scheme
 set background=dark
 colorscheme hybrid
+set termguicolors
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1
 set showcmd
