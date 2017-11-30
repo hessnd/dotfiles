@@ -31,6 +31,9 @@ Plugin 'w0rp/ale'
 Plugin 'prettier/vim-prettier'
 Plugin 'alampros/vim-styled-jsx'
 Plugin 'crusoexia/vim-javascript-lib'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'elzr/vim-json'
+Plugin 'townk/vim-autoclose'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
