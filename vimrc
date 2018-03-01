@@ -1,4 +1,5 @@
 set nocompatible
+filetype off
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -226,6 +227,9 @@ set t_RV=
 
 " Allow jsx syntax in js files
 let g:jsx_ext_required = 0
+
+" json syntax highlighting
+autocmd BufNewFile,BufRead *.json set ft=javascript
 
 " Ale settings
 let g:ale_linters = {}
