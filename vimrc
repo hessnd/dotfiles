@@ -1,5 +1,4 @@
 set nocompatible
-filetype off
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -16,7 +15,6 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'tomtom/tcomment_vim'
 Plugin 'ap/vim-css-color'
 Plugin 'posva/vim-vue'
 Plugin 'mustache/vim-mustache-handlebars'
@@ -209,8 +207,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
-" tComment Settings
-map <leader>/ gc
+" NerdCommenter
+let g:NERDSpaceDelims = 2
+vnoremap <leader>/ :call NERDComment(0,"toggle")<CR>
 
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>

@@ -104,3 +104,9 @@ export PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
 
 # added by travis gem
 [ -f /Users/nhess/.travis/travis.sh ] && source /Users/nhess/.travis/travis.sh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/nhess/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/nhess/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/nhess/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/nhess/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
