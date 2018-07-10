@@ -87,6 +87,7 @@ alias vsc="open -a 'Visual Studio Code'"
 alias code="cd ~/code"
 alias dotfiles="cd ~/.dotfiles"
 alias apps="cd /Applications"
+alias dc="docker-compose"
 export GIT_EDITOR="vim"
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 
@@ -110,3 +111,10 @@ if [ -f '/Users/nhess/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/nhess/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/nhess/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Timing app
+PROMPT_TITLE='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"'
+export PROMPT_COMMAND="${PROMPT_TITLE}; ${PROMPT_COMMAND}"
+
+# Flutter
+export PATH="$PATH:$HOME/flutter/bin:$PATH"
