@@ -22,7 +22,6 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'tpope/vim-surround'
-Plugin 'mattn/emmet-vim'
 Plugin 'xuyuanp/nerdtree-git-plugin'
 Plugin 'yggdroot/indentline'
 Plugin 'mxw/vim-jsx'
@@ -84,6 +83,7 @@ endif
 " Autocomplete Menu
 set wildmenu
 set wildmode=longest:list,full
+set wildignore=*.swp,*.bak,*.pyc,*.class
 
 " Ignore case when searching
 set ignorecase
