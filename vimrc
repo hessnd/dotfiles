@@ -32,6 +32,7 @@ Plugin 'crusoexia/vim-javascript-lib'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'elzr/vim-json'
 Plugin 'townk/vim-autoclose'
+Plugin 'leafgarland/typescript-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
