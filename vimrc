@@ -67,6 +67,11 @@ colorscheme hybrid
 set termguicolors
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1
+hi htmlArg gui=italic
+hi Comment gui=italic
+hi Type gui=italic
+hi Comment cterm=italic
+hi Type cterm=italic
 set showcmd
 
 " Turn Backkup off
