@@ -5,10 +5,12 @@ chsh -s $(which zsh)
 
 echo -n "SymLinking dotfiles..."
 #Symlink .zshrc and .vimrc
-ln -s $HOME/.dotfiles/vimrc $HOME/.vimrc
-mkdir $HOME/.vim/
-ln -s $HOME/.dotfiles/zshrc $HOME/.zshrc
-ln -s $HOME/.dotfiles/git/gitconfig $HOME/.gitconfig
+ln -s $HOME/dotfiles/vimrc $HOME/.vimrc
+#mkdir $HOME/.vim/
+ln -s $HOME/dotfiles/zshrc $HOME/.zshrc
+ln -s $HOME/dotfiles/git/gitconfig $HOME/.gitconfig
+echo -n "Setting italics in vim"
+tic xterm-256color-italic.terminfo
 echo 'done!'
 
 #Brew specific installs
