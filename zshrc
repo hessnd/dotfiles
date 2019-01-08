@@ -80,12 +80,12 @@ fi
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="vim ~/.dotfiles/zshrc"
+alias zshconfig="vim ~/dotfiles/zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias st="open -a 'Sublime Text'"
 alias vsc="open -a 'Visual Studio Code'"
 alias code="cd ~/code"
-alias dotfiles="cd ~/.dotfiles"
+alias dotfiles="cd ~/dotfiles"
 alias apps="cd /Applications"
 alias dc="docker-compose"
 export GIT_EDITOR="vim"
