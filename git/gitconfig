@@ -23,3 +23,5 @@
   new = green
 
 dsf = "!git diff --color$@ | diff-so-fancy"
+[credential]
+	helper = osxkeychain

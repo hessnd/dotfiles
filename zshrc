@@ -106,12 +106,6 @@ export PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
 # added by travis gem
 [ -f /Users/nhess/.travis/travis.sh ] && source /Users/nhess/.travis/travis.sh
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/nhess/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/nhess/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/nhess/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/nhess/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
 # Timing app
 PROMPT_TITLE='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"'
 export PROMPT_COMMAND="${PROMPT_TITLE}; ${PROMPT_COMMAND}"
@@ -122,9 +116,15 @@ export PATH="$PATH:$HOME/flutter/bin:$PATH"
 # MVN
 export PATH=~/apache-maven-3.5.4/bin:$PATH
 
+# Yarn
+export PATH="$PATH:$(yarn global bin)"
+
 # Operator Mono to have cursives in vim
 export TERM=xterm-256color-italic
 
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [[ -f /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/nhess/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/nhess/google-cloud-sdk/completion.zsh.inc'; fi
