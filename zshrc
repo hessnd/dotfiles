@@ -48,7 +48,7 @@ ZSH_THEME="miloshadzic"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git github brew osx sublime zsh-wakatime)
+plugins=(git github brew osx sublime)
 
 # User configuration
 DEFAULT_USER="nhess"
