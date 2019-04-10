@@ -83,7 +83,7 @@ fi
 alias zshconfig="vim ~/dotfiles/zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias st="open -a 'Sublime Text'"
-alias vsc="open -a 'Visual Studio Code'"
+alias vsc="open -a 'VSCodium'"
 alias code="cd ~/code"
 alias dotfiles="cd ~/dotfiles"
 alias apps="cd /Applications"
