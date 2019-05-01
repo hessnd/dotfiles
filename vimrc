@@ -33,6 +33,10 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'elzr/vim-json'
 Plugin 'townk/vim-autoclose'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'dyng/ctrlsf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -239,6 +243,10 @@ let g:jsx_ext_required = 0
 " json syntax highlighting
 autocmd BufNewFile,BufRead *.json set ft=javascript
 
+" Use deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = "200"
+
 " Ale settings
 let g:ale_linters = {}
 let g:ale_linters['javascript'] = ['eslint']
@@ -258,3 +266,19 @@ let g:prettier#config#single_quote = 'true'
 let g:prettier#config#trailing_comma = 'es5'
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#parser = 'babylon'
+
+" ctrlsf
+nmap     <C-F>f <Plug>CtrlSFPrompt                  
+nmap     <C-F>n <Plug>CtrlSFCwordPath
+nmap     <C-F>p <Plug>CtrlSFPwordPath
+let g:ctrlsf_ignore_dir = ['.next', 'node_modules']
+let g:ctrlsf_auto_focus = {
+    \ "at": "done",
+    \ "duration_less_than": 1000
+    \ }
+let g:ctrlsf_mapping = {
+    \ "next": "n",
+    \ "prev": "N",
+    \ }
+let g:ctrlsf_search_mode = 'async'
+

@@ -48,7 +48,7 @@ ZSH_THEME="miloshadzic"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git github brew osx sublime)
+plugins=(git github brew osx)
 
 # User configuration
 DEFAULT_USER="nhess"
@@ -101,7 +101,6 @@ export PACKAGE_DIRS="/Users/nhess/Code/meteor/packages"
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 #PHP version
 export PATH=/usr/local/php5/bin:$PATH
-export PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
 
 # added by travis gem
 [ -f /Users/nhess/.travis/travis.sh ] && source /Users/nhess/.travis/travis.sh
@@ -131,3 +130,5 @@ if [ -f '/Users/nhess/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/nhess/goo
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/nhess/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/nhess/google-cloud-sdk/completion.zsh.inc'; fi
+
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
