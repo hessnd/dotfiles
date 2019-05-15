@@ -71,6 +71,7 @@ colorscheme hybrid
 set termguicolors
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1
+hi Normal guibg=NONE ctermbg=NONE
 hi htmlArg gui=italic
 hi Comment gui=italic
 hi Type gui=italic
@@ -244,16 +245,17 @@ let g:jsx_ext_required = 0
 autocmd BufNewFile,BufRead *.json set ft=javascript
 
 " Use deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_delay = "200"
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#auto_complete_delay = "200"
 
 " Ale settings
 let g:ale_linters = {}
 let g:ale_linters['javascript'] = ['eslint']
 let g:ale_linters['jsx'] = ['eslint']
 let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fixers['jsx'] = ['prettier']
+" Turn off prettier to not interfere with eslint-prettier
+" let g:ale_fixers['javascript'] = ['prettier']
+" let g:ale_fixers['jsx'] = ['prettier']
 let g:ale_fixers['scss'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --print-width 100'

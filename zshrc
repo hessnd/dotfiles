@@ -83,11 +83,12 @@ fi
 alias zshconfig="vim ~/dotfiles/zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias st="open -a 'Sublime Text'"
-alias vsc="open -a 'VSCodium'"
+alias vsc="open -a 'Visual Studio Code'"
 alias code="cd ~/code"
 alias dotfiles="cd ~/dotfiles"
 alias apps="cd /Applications"
 alias dc="docker-compose"
+alias loft="docker-compose -f docker-compose.yml -f docker-compose.dev.yml"
 export GIT_EDITOR="vim"
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 
