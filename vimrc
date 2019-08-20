@@ -33,10 +33,8 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'elzr/vim-json'
 Plugin 'townk/vim-autoclose'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'dyng/ctrlsf.vim'
+Plugin 'marijnh/tern_for_vim', { 'do' : 'npm install' }
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -65,6 +63,9 @@ set backspace=2
 " Show matching brackets when hovering over
 set showmatch
 
+" Autocompletion
+set omnifunc=syntaxcomplete#Complete
+
 " Color Scheme
 set background=dark
 colorscheme hybrid
@@ -90,11 +91,6 @@ if has('persistent_undo')
   set undodir=~/.vim/backups
   set undofile
 endif
-
-" Autocomplete Menu
-set wildmenu
-set wildmode=longest:list,full
-set wildignore=*.swp,*.bak,*.pyc,*.class
 
 " Ignore case when searching
 set ignorecase
@@ -255,12 +251,11 @@ let g:ale_linters = {}
 let g:ale_linters['javascript'] = ['eslint']
 let g:ale_linters['jsx'] = ['eslint']
 let g:ale_fixers = {}
-" Turn off prettier to not interfere with eslint-prettier
-" let g:ale_fixers['javascript'] = ['prettier']
-" let g:ale_fixers['jsx'] = ['prettier']
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['jsx'] = ['prettier']
 let g:ale_fixers['scss'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
-let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --print-width 100'
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --print-width 100 --no-semi'
 let g:airline#extensions#ale#enabled = 1
 let g:ale_fix_on_save = 1
 
@@ -269,6 +264,7 @@ let g:prettier#config#print_width = 100
 let g:prettier#config#single_quote = 'true'
 let g:prettier#config#trailing_comma = 'es5'
 let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#semi = 'false'
 let g:prettier#config#parser = 'babylon'
 
 " ctrlsf
