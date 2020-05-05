@@ -25,7 +25,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'xuyuanp/nerdtree-git-plugin'
 Plugin 'yggdroot/indentline'
 Plugin 'mxw/vim-jsx'
-Plugin 'w0rp/ale'
+Plugin 'dense-analysis/ale'
+Plugin 'flowtype/vim-flow'
 Plugin 'prettier/vim-prettier'
 Plugin 'alampros/vim-styled-jsx'
 Plugin 'crusoexia/vim-javascript-lib'
@@ -34,7 +35,7 @@ Plugin 'elzr/vim-json'
 Plugin 'townk/vim-autoclose'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'dyng/ctrlsf.vim'
-Plugin 'marijnh/tern_for_vim', { 'do' : 'npm install' }
+Plugin 'udalov/kotlin-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -266,6 +267,9 @@ let g:prettier#config#trailing_comma = 'es5'
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#semi = 'false'
 let g:prettier#config#parser = 'babylon'
+
+" Flow
+let g:javascript_plugin_flow = 1
 
 " ctrlsf
 nmap     <C-F>f <Plug>CtrlSFPrompt                  

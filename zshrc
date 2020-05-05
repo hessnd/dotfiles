@@ -6,6 +6,10 @@ export ZSH=/Users/nhess/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="miloshadzic"
 
+# TMUX
+# Autmoatically start tmux
+ZSH_TMUX_AUTOSTART=true
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -26,7 +30,7 @@ ZSH_THEME="miloshadzic"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -34,7 +38,7 @@ ZSH_THEME="miloshadzic"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -48,7 +52,7 @@ ZSH_THEME="miloshadzic"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git github brew osx)
+plugins=(git github brew osx node tmux)
 
 # User configuration
 DEFAULT_USER="nhess"
@@ -61,12 +65,10 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
+export EDITOR='nvim'
+
+# Enabled true color support for terminals
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -81,8 +83,7 @@ fi
 #
 # Example aliases
 alias zshconfig="vim ~/dotfiles/zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias st="open -a 'Sublime Text'"
+alias vim="nvim"
 alias vsc="open -a 'Visual Studio Code'"
 alias code="cd ~/code"
 alias dotfiles="cd ~/dotfiles"
@@ -103,13 +104,6 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 #PHP version
 export PATH=/usr/local/php5/bin:$PATH
 
-# added by travis gem
-[ -f /Users/nhess/.travis/travis.sh ] && source /Users/nhess/.travis/travis.sh
-
-# Timing app
-PROMPT_TITLE='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"'
-export PROMPT_COMMAND="${PROMPT_TITLE}; ${PROMPT_COMMAND}"
-
 # Flutter
 export PATH="$PATH:$HOME/flutter/bin:$PATH"
 
@@ -122,14 +116,9 @@ export PATH="$PATH:$(yarn global bin)"
 # Operator Mono to have cursives in vim
 export TERM=xterm-256color-italic
 
-# tabtab source for electron-forge package
-# uninstall by removing these lines or running `tabtab uninstall electron-forge`
-[[ -f /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/nhess/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/nhess/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/nhess/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/nhess/google-cloud-sdk/completion.zsh.inc'; fi
-
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
+# Set Spaceship as prompt
+autoload -U promptinit; promptinit
+prompt spaceship
+SPACESHIP_PACKAGE_SHOW=false
