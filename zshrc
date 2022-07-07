@@ -8,7 +8,7 @@ ZSH_THEME="miloshadzic"
 
 # TMUX
 # Autmoatically start tmux
-ZSH_TMUX_AUTOSTART=true
+# ZSH_TMUX_AUTOSTART=true
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -30,7 +30,7 @@ ZSH_TMUX_AUTOSTART=true
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -52,7 +52,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git github brew osx node tmux)
+plugins=(git github brew macos node)
 
 # User configuration
 DEFAULT_USER="nhess"
@@ -95,12 +95,10 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 
 eval "$(rbenv init -)"
 
-export NVM_DIR="~/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PACKAGE_DIRS="/Users/nhess/Code/meteor/packages"
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+
 #PHP version
 export PATH=/usr/local/php5/bin:$PATH
 
@@ -118,7 +116,18 @@ export TERM=xterm-256color-italic
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
-# Set Spaceship as prompt
-autoload -U promptinit; promptinit
-prompt spaceship
-SPACESHIP_PACKAGE_SHOW=false
+# Java
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/nhess/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/nhess/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/nhess/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/nhess/google-cloud-sdk/completion.zsh.inc'; fi
+
+# bun completions
+[ -s "/Users/nhess/.bun/_bun" ] && source "/Users/nhess/.bun/_bun"
+
+# Bun
+export BUN_INSTALL="/Users/nhess/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
