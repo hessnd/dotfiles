@@ -6,7 +6,7 @@
 
 [user]
   name = hessnd
-  email = n.hess@loftsmart.com
+  email = nick@nickhess.dev
 
 [color]
   ui = true
@@ -24,4 +24,4 @@
 
 dsf = "!git diff --color$@ | diff-so-fancy"
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
