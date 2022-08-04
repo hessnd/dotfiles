@@ -29,6 +29,9 @@ set softtabstop=2
 
 " Indentation amount for < and > commands.
 set shiftwidth=2
+set autoindent
+set cindent
+set smartindent
 
 " do not wrap long lines by default
 set nowrap
@@ -42,6 +45,10 @@ set noruler
 
 " Only one line for command line
 set cmdheight=1
+
+" Indent line
+let g:indentLine_setColors = 0
+let g:indentLine_defaultGroup = 'SpecialKey'
 
 " === Completion Settings === "
 
@@ -84,26 +91,28 @@ call denite#custom#var('grep', 'final_opts', [])
 call denite#custom#var('buffer', 'date_format', '')
 
 " Custom options for Denite
-"   auto_resize             - Auto resize the Denite window height automatically.
-"   prompt                  - Customize denite prompt
-"   direction               - Specify Denite window direction as directly below current pane
-"   winminheight            - Specify min height for Denite window
-"   highlight_mode_insert   - Specify h1-CursorLine in insert mode
-"   prompt_highlight        - Specify color of prompt
-"   highlight_matched_char  - Matched characters highlight
-"   highlight_matched_range - matched range highlight
+"   split                       - Use floating window for Denite
+"   start_filter                - Start filtering on default
+"   auto_resize                 - Auto resize the Denite window height automatically.
+"   source_names                - Use short long names if multiple sources
+"   prompt                      - Customize denite prompt
+"   highlight_matched_char      - Matched characters highlight
+"   highlight_matched_range     - matched range highlight
+"   highlight_window_background - Change background group in floating window
+"   highlight_filter_background - Change background group in floating filter window
+"   winrow                      - Set Denite filter window to top
+"   vertical_preview            - Open the preview window vertically
+
 let s:denite_options = {'default' : {
 \ 'split': 'floating',
 \ 'start_filter': 1,
 \ 'auto_resize': 1,
 \ 'source_names': 'short',
-\ 'prompt': 'λ:',
-\ 'statusline': 0,
-\ 'highlight_matched_char': 'WildMenu',
+\ 'prompt': 'λ ',
+\ 'highlight_matched_char': 'QuickFixLine',
 \ 'highlight_matched_range': 'Visual',
 \ 'highlight_window_background': 'Visual',
-\ 'highlight_filter_background': 'StatusLine',
-\ 'highlight_prompt': 'StatusLine',
+\ 'highlight_filter_background': 'DiffAdd',
 \ 'winrow': 1,
 \ 'vertical_preview': 1
 \ }}
@@ -133,6 +142,7 @@ inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+let g:coc_global_extensions = ['coc-tsserver']
 
 "Close preview window when completion is done.
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -149,19 +159,26 @@ let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
 " Hide conceal markers
 let g:neosnippet#enable_conceal_markers = 0
 
-" === NERDTree === "
-" Show hidden files/directories
-let g:NERDTreeShowHidden = 1
-
-" Remove bookmarks and help text from NERDTree
-let g:NERDTreeMinimalUI = 1
-
-" Custom icons for expandable/expanded directories
-let g:NERDTreeDirArrowExpandable = '⬏'
-let g:NERDTreeDirArrowCollapsible = '⬎'
-
-" Hide certain files and directories from NERDTree
-let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir]]', '\.sass-cache$']
+" === Nvim Tree === "
+lua << EOF
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+    adaptive_size = true,
+    mappings = {
+      list = {
+        { key = "u", action = "dir_up" },
+      },
+    },
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+EOF
 
 " Wrap in try/catch to avoid errors on initial install before plugin is available
 try
@@ -179,35 +196,34 @@ let g:airline_skip_empty_sections = 1
 " Smartly uniquify buffers names with similar filename, suppressing common parts of paths.
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
-" Custom setup that removes filetype/whitespace from default vim airline bar
+" custom setup that removes filetype/whitespace from default vim airline bar
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning', 'error']]
 
-let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+let airline#extensions#coc#stl_format_err = '%e{[%e(#%fe)]}'
 
-let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+let airline#extensions#coc#stl_format_warn = '%w{[%w(#%fw)]}'
 
-" Configure error/warning section to use coc.nvim
+" configure error/warning section to use coc.nvim
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
-" Hide the Nerdtree status line to avoid clutter
 let g:NERDTreeStatusline = ''
 
-" Disable vim-airline in preview mode
+" diable vim-airline in preview mode
 let g:airline_exclude_preview = 1
 
-" Enable powerline fonts
+" enable powerline fonts
 let g:airline_powerline_fonts = 1
 
-" Enable caching of syntax highlighting groups
+" enable caching of syntax highlighting groups
 let g:airline_highlighting_cache = 1
 
-" Define custom airline symbols
+" define custom airline symbols
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-" Don't show git changes to current file in airline
+" don't show git changes to current file in airline
 let g:airline#extensions#hunks#enabled=0
 
 catch
@@ -227,10 +243,15 @@ let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
 
 " === javascript-libraries-syntax === "
-let g:used_javascript_libs = 'underscore,requirejs,chai,jquery'
+let g:used_javascript_libs = 'underscore,requirejs,chai,jquery,react'
 
 " === Signify === "
 let g:signify_sign_delete = '-'
+
+" === Hop === "
+lua << EOF
+require'hop'.setup()
+EOF
 
 " ============================================================================ "
 " ===                                UI                                    === "
@@ -238,14 +259,6 @@ let g:signify_sign_delete = '-'
 
 " Enable true color support
 set termguicolors
-
-" Editor theme
-set background=dark
-try
-  colorscheme OceanicNext
-catch
-  colorscheme slate
-endtry
 
 " Vim airline theme
 let g:airline_theme='base16_oceanicnext'
@@ -279,35 +292,52 @@ set noshowmode
 " Set floating window to be slightly transparent
 set winbl=10
 
-" coc.nvim color changes
-hi! link CocErrorSign WarningMsg
-hi! link CocWarningSign Number
-hi! link CocInfoSign Type
+" ============================================================================ "
+" ===                      CUSTOM COLORSCHEME CHANGES                      === "
+" ============================================================================ "
+"
+" Add custom highlights in method that is executed every time a colorscheme is sourced
+" See https://gist.github.com/romainl/379904f91fa40533175dfaec4c833f2f for details
+function! TrailingSpaceHighlights() abort
+  " Hightlight trailing whitespace
+  highlight Trail ctermbg=red guibg=red
+  call matchadd('Trail', '\s\+$', 100)
+endfunction
 
-" Make background transparent for many things
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE
-hi! LineNr ctermfg=NONE guibg=NONE
-hi! SignColumn ctermfg=NONE guibg=NONE
-hi! StatusLine guifg=#16252b guibg=#6699CC
-hi! StatusLineNC guifg=#16252b guibg=#16252b
+function! s:custom_jarvis_colors()
+  " coc.nvim color changes
+  hi link CocErrorSign WarningMsg
+  hi link CocWarningSign Number
+  hi link CocInfoSign Type
 
-" Try to hide vertical spit and end of buffer symbol
-hi! VertSplit gui=NONE guifg=#17252c guibg=#17252c
-hi! EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=#17252c guifg=#17252c
+  " Make background transparent for many things
+  hi Normal ctermbg=NONE guibg=NONE
+  hi NonText ctermbg=NONE guibg=NONE
+  hi LineNr ctermfg=NONE guibg=NONE
+  hi SignColumn ctermfg=NONE guibg=NONE
+  hi StatusLine guifg=#16252b guibg=#6699CC
+  hi StatusLineNC guifg=#16252b guibg=#16252b
 
-" Customize NERDTree directory
-hi! NERDTreeCWD guifg=#99c794
+  " Try to hide vertical spit and end of buffer symbol
+  hi VertSplit gui=NONE guifg=#17252c guibg=#17252c
+  hi EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=#17252c guifg=#17252c
 
-" Make background color transparent for git changes
-hi! SignifySignAdd guibg=NONE
-hi! SignifySignDelete guibg=NONE
-hi! SignifySignChange guibg=NONE
+  " Customize NERDTree directory
+  hi NERDTreeCWD guifg=#99c794
 
-" Highlight git change signs
-hi! SignifySignAdd guifg=#99c794
-hi! SignifySignDelete guifg=#ec5f67
-hi! SignifySignChange guifg=#c594c5
+  " Make background color transparent for git changes
+  hi SignifySignAdd guibg=NONE
+  hi SignifySignDelete guibg=NONE
+  hi SignifySignChange guibg=NONE
+
+  " Highlight git change signs
+  hi SignifySignAdd guifg=#99c794
+  hi SignifySignDelete guifg=#ec5f67
+  hi SignifySignChange guifg=#c594c5
+endfunction
+
+autocmd! ColorScheme * call TrailingSpaceHighlights()
+autocmd! ColorScheme OceanicNext call s:custom_jarvis_colors()
 
 " Call method on window enter
 augroup WindowManagement
@@ -322,6 +352,13 @@ function! Handle_Win_Enter()
   endif
 endfunction
 
+" Editor theme
+set background=dark
+try
+  colorscheme OceanicNext
+catch
+  colorscheme slate
+endtry
 " ============================================================================ "
 " ===                             KEY MAPPINGS                             === "
 " ============================================================================ "
@@ -340,6 +377,9 @@ nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
 "   <C-o>         - Switch to normal mode inside of search results
 "   <Esc>         - Exit denite window in any mode
 "   <CR>          - Open currently selected file in any mode
+"   <C-t>         - Open currently selected file in a new tab
+"   <C-v>         - Open currently selected file a vertical split
+"   <C-h>         - Open currently selected file in a horizontal split
 autocmd FileType denite-filter call s:denite_filter_my_settings()
 function! s:denite_filter_my_settings() abort
   imap <silent><buffer> <C-o>
@@ -364,6 +404,9 @@ endfunction
 "   d           - Delete currenly selected file
 "   p           - Preview currently selected file
 "   <C-o> or i  - Switch to insert mode inside of filter prompt
+"   <C-t>       - Open currently selected file in a new tab
+"   <C-v>       - Open currently selected file a vertical split
+"   <C-h>       - Open currently selected file in a horizontal split
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> <CR>
@@ -388,11 +431,28 @@ function! s:denite_my_settings() abort
   \ denite#do_map('do_action', 'split')
 endfunction
 
+" === NerdCommenter === "
+filetype plugin on
+let g:NERDSpaceDelims = 1
+
+" === Nvim Comment === "
+lua << EOF
+ require('Comment').setup()
+EOF
+
 " === Nerdtree shorcuts === "
 "  <leader>n - Toggle NERDTree on/off
 "  <leader>f - Opens current file location in NERDTree
-nmap <leader>n :NERDTreeToggle<CR>
-nmap <leader>f :NERDTreeFind<CR>
+" nmap <leader>n :NERDTreeToggle<CR>
+" nmap <leader>f :NERDTreeFind<CR>
+
+"=== Nvim Tree shortcuts === "
+nmap <leader>n :NvimTreeToggle<CR>
+nmap <leader>f :NvimTreeFindFile<CR>
+
+" === Git Blame Shortcuts === "
+nmap <leader>b :BlamerToggle<CR>
+
 
 "   <Space> - PageDown
 "   -       - PageUp
@@ -405,11 +465,43 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
+" Use Ctrl-c to copy and Ctrl-v to paste
+vnoremap <C-c> :w !pbcopy<CR><CR>
+noremap <C-v> :r !pbpaste<CR><CR>
+
+" Coc auto show definition
+function! ShowDocIfNoDiagnostic(timer_id)
+  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
+    silent call CocActionAsync('doHover')
+  endif
+endfunction
+
+function! s:show_hover_doc()
+  call timer_start(500, 'ShowDocIfNoDiagnostic')
+endfunction
+
+autocmd CursorHoldI * :call <SID>show_hover_doc()
+autocmd CursorHold * :call <SID>show_hover_doc()
+
 " === coc.nvim === "
+"   <leader>dd    - Jump to definition of current symbol
+"   <leader>dr    - Jump to references of current symbol
+"   <leader>dj    - Jump to implementation of current symbol
+"   <leader>ds    - Fuzzy search current project symbols
+"   <leader>dv    - Apply Code Action to Current line
+"   <leader>dt    - Apply AutoFix to problem on current line
+nmap <leader>dn <Plug>(coc-fix-current)
 nmap <silent> <leader>dd <Plug>(coc-definition)
 nmap <silent> <leader>dr <Plug>(coc-references)
 nmap <silent> <leader>dj <Plug>(coc-implementation)
-nmap <leader>do <Plug>(coc-codeaction)
+nnoremap <silent> <leader>ds :<C-u>CocList -I -N --top symbols<CR>
+nmap <leader>dv <Plug>(coc-codeaction)
+nmap <leader>dn <Plug>(coc-fix-current)
+nmap <silent> <leader>dt <Plug>(coc-type-definition)
+
+"=== copilot === "
+"   <leader>cp    - Copilot
+nmap <leader>cp <Plug>(copilot)
 
 " === vim-better-whitespace === "
 "   <leader>y - Automatically remove trailing whitespace
@@ -417,13 +509,13 @@ nmap <leader>y :StripWhitespace<CR>
 
 " === Search shorcuts === "
 "   <leader>h - Find and replace
-"   <leader>/ - Claer highlighted search terms while preserving history
+"   <leader>/ - Clear highlighted search terms while preserving history
 map <leader>h :%s///<left><left>
 nmap <silent> <leader>/ :nohlsearch<CR>
 
-" === Easy-motion shortcuts ==="
-"   <leader>w - Easy-motion highlights first word letters bi-directionally
-map <leader>w <Plug>(easymotion-bd-w)
+" === Hop Easy-motion shortcuts ==="
+"   <leader>w - Hop will hint the first non-whitespace character of each line
+map <leader>w :HopLineStart<CR>
 
 " Allows you to save files you opened without write permissions via sudo
 cmap w!! w !sudo tee %
@@ -445,7 +537,7 @@ vnoremap <leader>p "_dP
 autocmd VimResized * wincmd =
 
 " Automaticaly close nvim if NERDTree is only thing left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " === Search === "
 " ignore case when searching
@@ -459,6 +551,12 @@ set autoread
 
 " Enable line numbers
 set number
+
+" Enable spellcheck for markdown files
+autocmd BufRead,BufNewFile *.md setlocal spell
+
+" Set Test strategy
+let test#strategy = "vtr"
 
 " Set backups
 if has('persistent_undo')
@@ -474,11 +572,3 @@ set noswapfile
 if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
-
-" Telescope
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-

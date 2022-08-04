@@ -111,4 +111,3 @@ let g:airline#themes#base16_oceanicnext#palette.ctrlp = airline#extensions#ctrlp
       \ [ s:gui07, s:gui02, s:cterm07, s:cterm02, '' ],
       \ [ s:gui07, s:gui04, s:cterm07, s:cterm04, '' ],
       \ [ s:gui05, s:gui01, s:cterm05, s:cterm01, 'bold' ])
-

@@ -27,26 +27,39 @@ Plug 'ntpeters/vim-better-whitespace'
 " auto-close plugin
 Plug 'rstacruz/vim-closer'
 
-" Improved motion in Vim
-Plug 'easymotion/vim-easymotion'
+" Hop EasyMotion
+Plug 'phaazon/hop.nvim'
+
+" Indent Lines
+Plug 'Yggdroot/indentLine'
 
 " Intellisense Engine
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = ['coc-tsserver']
-
-if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-  let g:coc_global_extensions += ['coc-prettier']
-endif
-
-if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-  let g:coc_global_extensions += ['coc-eslint']
-endif
-
-" Tmux/Neovim movement integration
-Plug 'christoomey/vim-tmux-navigator'
 
 " Denite - Fuzzy finding, buffer management
-Plug 'Shougo/denite.nvim'
+if has('nvim')
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/denite.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+" Vim test
+Plug 'vim-test/vim-test'
+Plug 'christoomey/vim-tmux-runner'
+
+" Nerd Commmenter
+Plug 'preservim/nerdcommenter'
+
+" Nvim commenter
+Plug 'numToStr/Comment.nvim'
+
+" Kotlin
+Plug 'udalov/kotlin-vim'
+
+" GraphQL
+Plug 'jparise/vim-graphql'
 
 " Snippet support
 Plug 'Shougo/neosnippet'
@@ -60,21 +73,27 @@ Plug 'Shougo/echodoc.vim'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 
+" Show git blame
+Plug 'APZelos/blamer.nvim'
+
+" Copilot
+Plug 'github/copilot.vim'
+
 " === Javascript Plugins === "
 " Typescript syntax highlighting
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'pangloss/vim-javascript'
 
 " ReactJS JSX syntax highlighting
-Plug 'mxw/vim-jsx'
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'maxmellon/vim-jsx-pretty'
 
 " Generate JSDoc commands based on function signature
 Plug 'heavenshell/vim-jsdoc'
 
 " === Syntax Highlighting === "
 
-" Styled Components
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+" Syntax highlighting for nginx
+Plug 'chr4/nginx.vim'
 
 " Syntax highlighting for javascript libraries
 Plug 'othree/javascript-libraries-syntax.vim'
@@ -82,12 +101,10 @@ Plug 'othree/javascript-libraries-syntax.vim'
 " Improved syntax highlighting and indentation
 Plug 'othree/yajs.vim'
 
-" Kotlin
-Plug 'udalov/kotlin-vim'
-
 " === UI === "
 " File explorer
-Plug 'scrooloose/nerdtree'
+Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 
 " Colorscheme
 Plug 'mhartington/oceanic-next'
@@ -96,23 +113,5 @@ Plug 'mhartington/oceanic-next'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Icons
-Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
-" Graphql
-Plug 'jparise/vim-graphql'
-
-" Copilot
-Plug 'github/copilot.vim'
-
-" Treesitter
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-" Telescope
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-lua/plenary.nvim'
-
 " Initialize plugin system
 call plug#end()
-
