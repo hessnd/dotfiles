@@ -15,8 +15,11 @@
     "javascriptreact",
     "typescript.tsx"
   ],
+  "eslint.alwaysShowStatus": true,
+  "eslint.packageManager": "yarn",
+  "eslint.format.enable": true,
   "eslint.autoFixOnSave": true,
-  "diagnostic.errorSign": "•",
+  "diagnostic.errorSign": "!",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
   "tsserver.formatOnType": true,
