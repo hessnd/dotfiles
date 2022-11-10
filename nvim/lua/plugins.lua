@@ -14,6 +14,22 @@ packer.startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
+  use {
+    'zbirenbaum/copilot.lua',
+    event = "VimEnter",
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup()
+      end, 100)
+    end,
+  }
+  use {
+    'zbirenbaum/copilot-cmp',
+    after = { 'copilot.lua' },
+    config = function()
+      require('copilot_cmp').setup()
+    end
+  }
   use 'nvim-lua/plenary.nvim'
   use 'onsails/lspkind-nvim'
   use 'hrsh7th/nvim-cmp'
