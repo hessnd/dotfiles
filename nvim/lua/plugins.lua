@@ -15,6 +15,10 @@ packer.startup(function(use)
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
   use {
+    'akinsho/toggleterm.nvim',
+    tag = '*'
+  }
+  use {
     'zbirenbaum/copilot.lua',
     event = "VimEnter",
     config = function()
