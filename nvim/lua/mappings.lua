@@ -2,8 +2,11 @@ local map = require("utils").map
 
 map("n", "<ESC>", "<cmd> noh <CR>")
 
+-- close buffer
+map("n", "<leader>x", "<cmd> bdelete <CR>", { desc = "close current buffer" })
+
 -- copy all
-map("n", "<C-c>", "<cmd %y+ <CR>")
+map("n", "<C-c>", "<cmd> %y+ <CR>")
 
 map("i", "<C-h>", "<Left>")
 map("i", "<C-l>", "<Right>")
@@ -30,7 +33,7 @@ map("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.
 map(
   "n",
   "<leader>ff",
-  "<cmd>Telescope find_files <CR>",
+  "<cmd>Telescope find_files<CR>",
   { desc = "find files" }
 )
 map(

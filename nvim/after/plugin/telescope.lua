@@ -1,4 +1,19 @@
 local present, telescope = pcall(require, "telescope")
+local telescopeConfig = require "telescope.config"
+
+-- Clone the default Telescope configuration
+local vimgrep_arguments = {
+  unpack(telescopeConfig.values.vimgrep_arguments)
+}
+
+-- I want to search in hidden/dot files.
+table.insert(vimgrep_arguments, "--hidden")
+-- I don't want to search in the `.git` directory.
+table.insert(vimgrep_arguments, "--glob")
+table.insert(vimgrep_arguments, "!.git/*")
+-- table.insert(vimgrep_arguments, "!.yarn/*")
+-- table.insert(vimgrep_arguments, "!.next/*")
+
 
 if not present then
   return
@@ -8,15 +23,7 @@ vim.g.theme_switcher_loaded = true
 
 local options = {
   defaults = {
-    vimgrep_arguments = {
-      "rg",
-      "--color=never",
-      "--no-heading",
-      "--with-filename",
-      "--line-number",
-      "--column",
-      "--smart-case",
-    },
+    vimgrep_arguments = vimgrep_arguments,
     prompt_prefix = "   ",
     selection_caret = "  ",
     entry_prefix = "  ",
@@ -38,7 +45,7 @@ local options = {
       preview_cutoff = 120,
     },
     file_sorter = require("telescope.sorters").get_fuzzy_file,
-    file_ignore_patterns = { "node_modules", ".next", ".git" },
+    file_ignore_patterns = { "node_modules", ".next", ".yarn" },
     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
     path_display = { "truncate" },
     winblend = 0,
@@ -54,6 +61,12 @@ local options = {
     mappings = {
       n = { ["q"] = require("telescope.actions").close },
     },
+  },
+  pickers = {
+    find_files = {
+			-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+			find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
+		},
   },
 
   extensions_list = { "themes", "terms" },
