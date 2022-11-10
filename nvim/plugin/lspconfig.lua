@@ -23,8 +23,6 @@ local on_attach = function(client, bufnr)
 
   -- keymaps
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  -- buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  -- buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -34,6 +32,7 @@ lspconfig.tsserver.setup {
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
   cmd = { "typescript-language-server", "--stdio" },
   capabilities = capabilities,
+  root_dir = require('lspconfig.util').root_pattern('.git'),
 }
 
 lspconfig.sumneko_lua.setup {
