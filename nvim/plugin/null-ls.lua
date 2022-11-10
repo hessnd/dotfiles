@@ -14,11 +14,14 @@ end
 
 null_ls.setup {
   sources = {
+    -- $ npm install -g @fsouza/prettierd
     null_ls.builtins.formatting.prettierd,
+    -- $ npm install -g eslint_d
     null_ls.builtins.diagnostics.eslint_d.with({
       diagnostics_format = '[eslint] #{m}\n(#{c})'
     }),
-    null_ls.builtins.diagnostics.fish
+    null_ls.builtins.diagnostics.zsh,
+    null_ls.builtins.diagnostics.yamllint
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
