@@ -24,6 +24,7 @@ map("n", "<leader>b", "<cmd> enew <CR>", { desc = "new buffer" })
 -- NvimTree
 map("n", "<C-n>", "<cmd> NvimTreeToggle <CR>")
 map("n", "<leader>e", "<cmd> NvimTreeFocus <CR>")
+map("n", "<leader>r", "<cmd> NvimTreeFindFile <CR>")
 
 -- Comment
 map("n", "<leader>/", function() require("Comment.api").toggle.linewise.current() end)
