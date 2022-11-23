@@ -2,7 +2,14 @@ local status, jester = pcall(require, "jester")
 if (not status) then return end
 local map = require("utils").map
 
-jester.setup {}
+local Terminal  = require('toggleterm.terminal').Terminal
+
+jester.setup({
+  terminal_cmd = ":ToggleTerm direction=vertical size=60",
+  dap = {
+    console = Terminal
+  }
+})
 
 map("n", "<leader>jr", function() jester.run() end, { desc = "jest run test under cursor"})
 map(

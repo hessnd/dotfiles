@@ -2,9 +2,6 @@ local map = require("utils").map
 
 map("n", "<ESC>", "<cmd> noh <CR>")
 
--- close buffer
-map("n", "<leader>x", "<cmd> bdelete <CR>", { desc = "close current buffer" })
-
 -- copy all
 map("n", "<C-c>", "<cmd> %y+ <CR>")
 
@@ -18,13 +15,16 @@ map("n", "<C-l>", "<C-w>l")
 map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 
+map("n", "vv", "<cmd> :vsplit<CR>")
+map("n", "hh", "<cmd> :split<CR>")
+
 -- new buffer
 map("n", "<leader>b", "<cmd> enew <CR>", { desc = "new buffer" })
 
 -- NvimTree
 map("n", "<C-n>", "<cmd> NvimTreeToggle <CR>")
 map("n", "<leader>e", "<cmd> NvimTreeFocus <CR>")
-map("n", "<leader>r", "<cmd> NvimTreeFindFile <CR>")
+map("n", "<leader>tt", "<cmd> NvimTreeFindFile <CR>")
 
 -- Comment
 map("n", "<leader>/", function() require("Comment.api").toggle.linewise.current() end)

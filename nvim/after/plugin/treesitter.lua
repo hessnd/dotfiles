@@ -1,6 +1,15 @@
 local status, treesitter = pcall(require, "nvim-treesitter.configs")
 if not status then return end
 
+local jsx_comment = {
+  __default = '// %s',
+  jsx_element = '{/* %s */}',
+  jsx_fragment = '{/* %s */}',
+  jsx_attribute = '// %s',
+  comment = '// %s',
+  __multiline = '/* %s */',
+}
+
 local options = {
   highlight = {
     enable = true,
@@ -22,6 +31,14 @@ local options = {
   },
   autotag = {
     enable = true,
+  },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+    config = {
+      javascript = jsx_comment,
+      typescript = jsx_comment,
+    }
   },
 }
 

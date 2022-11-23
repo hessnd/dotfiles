@@ -7,7 +7,7 @@ saga.init_lsp_saga {
   server_filetype_map = {
     typescript = 'typescript'
   },
-  finder_request_timeout = 3000,
+  finder_request_timeout = 5000,
 }
 
 local opts = { silent = true }

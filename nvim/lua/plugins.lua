@@ -66,7 +66,6 @@ return require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     run = ":TSUpdate",
   }
-  use 'dinhhuy258/git.nvim'
   use 'lewis6991/gitsigns.nvim'
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
@@ -82,6 +81,9 @@ return require('packer').startup(function(use)
   }
   use 'norcalli/nvim-colorizer.lua'
   use 'David-Kunz/jester'
+  use 'famiu/bufdelete.nvim'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
+
   if packer_bootstrap then
     require('packer').sync()
   end
