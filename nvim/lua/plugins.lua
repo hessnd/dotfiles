@@ -83,6 +83,7 @@ return require('packer').startup(function(use)
   use 'David-Kunz/jester'
   use 'famiu/bufdelete.nvim'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use 'j-hui/fidget.nvim'
 
   if packer_bootstrap then
     require('packer').sync()

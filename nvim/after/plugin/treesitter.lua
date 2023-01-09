@@ -28,6 +28,7 @@ local options = {
     "css",
     "html",
     "graphql",
+    "kotlin"
   },
   autotag = {
     enable = true,

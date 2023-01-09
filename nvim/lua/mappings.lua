@@ -5,6 +5,7 @@ map("n", "<ESC>", "<cmd> noh <CR>")
 -- copy all
 map("n", "<C-c>", "<cmd> %y+ <CR>")
 
+-- Navigate windows
 map("i", "<C-h>", "<Left>")
 map("i", "<C-l>", "<Right>")
 map("i", "<C-j>", "<Down>")
@@ -15,8 +16,9 @@ map("n", "<C-l>", "<C-w>l")
 map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 
+-- Splits
 map("n", "vv", "<cmd> :vsplit<CR>")
-map("n", "hh", "<cmd> :split<CR>")
+-- map("n", "vh", "<cmd> :split<CR>") TODO: find better keymap
 
 -- new buffer
 map("n", "<leader>b", "<cmd> enew <CR>", { desc = "new buffer" })
