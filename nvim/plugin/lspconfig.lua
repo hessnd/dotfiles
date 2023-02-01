@@ -13,20 +13,16 @@ local enable_format_on_save = function(_, bufnr)
   })
 end
 
-local on_attach = function(client, bufnr)
+local on_attach = function(client)
   client.server_capabilities.documentFormattingProvider = false
   client.server_capabilities.documentRangeFormattingProvider = false
-
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-
-  local opts = { noremap = true, silent = true }
-
-  -- keymaps
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+lspconfig.tailwindcss.setup {}
+
+-- npm i -g typescript-language-server
 lspconfig.tsserver.setup {
   on_attach = on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
@@ -37,7 +33,7 @@ lspconfig.tsserver.setup {
 
 lspconfig.sumneko_lua.setup {
   on_attach = function(client, bufnr)
-    on_attach(client, bufnr)
+    on_attach(client)
     enable_format_on_save(client, bufnr)
   end,
   capabilities = capabilities,

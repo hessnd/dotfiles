@@ -1,6 +1,7 @@
 local status, cmp = pcall(require, "cmp")
 if (not status) then return end
-local lspkind = require 'lspkind'
+local status2, lspkind = pcall(require "lspkind")
+if (not status2) then return end
 
 vim.opt.completeopt = "menuone,noselect"
 
@@ -19,10 +20,11 @@ end
 
 local cmp_window = require "cmp.utils.window"
 
+-- Copilot settings
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil 
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
 end
 
 cmp_window.info_ = cmp_window.info
@@ -86,6 +88,7 @@ local options = {
       "s",
     }),
   },
+  -- Completion sources (order matters)
   sources = {
     { name = "copilot" },
     { name = "luasnip" },

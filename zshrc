@@ -8,7 +8,7 @@ ZSH_THEME="miloshadzic"
 
 # TMUX
 # Autmoatically start tmux
-# ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOSTART=true
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -52,7 +52,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git github brew macos node)
+plugins=(git github macos tmux)
 
 # User configuration
 DEFAULT_USER="nhess"
@@ -89,8 +89,7 @@ alias code="cd ~/code"
 alias dotfiles="cd ~/dotfiles"
 alias apps="cd /Applications"
 alias dc="docker-compose"
-alias loft="docker-compose -f docker-compose.yml -f docker-compose.dev.yml"
-export GIT_EDITOR="vim"
+export GIT_EDITOR="nvim"
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 
 eval "$(rbenv init -)"
@@ -119,15 +118,12 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 # Java
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/nhess/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/nhess/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/nhess/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/nhess/google-cloud-sdk/completion.zsh.inc'; fi
-
 # bun completions
 [ -s "/Users/nhess/.bun/_bun" ] && source "/Users/nhess/.bun/_bun"
 
 # Bun
 export BUN_INSTALL="/Users/nhess/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Zoxide
+eval "$(zoxide init zsh)"

@@ -23,3 +23,13 @@ echo 'done!'
 #Brew specific installs
 brew install git
 brew install node
+brew install neovim
+brew install treesitter
+brew install lua
+brew install lua-language-server
+
+# NPM installs
+npm install -g @fsouza/prettierd
+npm install -g eslint_d
+npm install -g typescript-language-server
+

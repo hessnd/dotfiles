@@ -1,6 +1,8 @@
 local status, treesitter = pcall(require, "nvim-treesitter.configs")
 if not status then return end
 
+-- brew install treesitter
+
 local jsx_comment = {
   __default = '// %s',
   jsx_element = '{/* %s */}',

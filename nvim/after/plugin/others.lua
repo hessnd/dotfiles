@@ -11,7 +11,11 @@ if (not fidget_status) then return end
 local map = require("utils").map
 
 -- Colorizer
-colorizer.setup()
+colorizer.setup({
+  css = { rgb_fn = true; };
+  'javascript';
+  'typescript.tsx';
+})
 
 -- BufDelete
 map('n', '<leader>x', function() bufdelete.bufdelete(0, false) end, { desc = "close buffer" })

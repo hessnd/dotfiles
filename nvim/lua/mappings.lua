@@ -1,5 +1,6 @@
 local map = require("utils").map
 
+-- Clear highlights
 map("n", "<ESC>", "<cmd> noh <CR>")
 
 -- copy all
