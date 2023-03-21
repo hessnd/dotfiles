@@ -28,10 +28,10 @@ lspconfig.tsserver.setup {
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
   cmd = { "typescript-language-server", "--stdio" },
   capabilities = capabilities,
-  root_dir = require('lspconfig.util').root_pattern('.git'),
+  root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json"),
 }
 
-lspconfig.sumneko_lua.setup {
+lspconfig.lua_ls.setup {
   on_attach = function(client, bufnr)
     on_attach(client)
     enable_format_on_save(client, bufnr)

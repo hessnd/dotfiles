@@ -26,11 +26,13 @@ local options = {
     "toml",
     "tsx",
     "json",
-    "yaml",
     "css",
+    "json",
     "html",
     "graphql",
-    "kotlin"
+    "kotlin",
+    "markdown",
+    "markdown_inline",
   },
   autotag = {
     enable = true,

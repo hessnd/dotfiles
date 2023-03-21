@@ -19,7 +19,7 @@ map('n', 'gp', '<Cmd>Lspsaga peek_definition<CR>', opts)
 map('n', 'gr', '<Cmd>Lspsaga rename<CR>', opts)
 map('n', '<leader>cd', '<Cmd>Lspsaga show_line_diagnostics<CR>', opts)
 map({'n', 'v'}, '<leader>ca', '<Cmd>Lspsaga code_action<CR>', opts)
-map('n', '<leader>o', '<cmd>LSoutlineToggle<CR>', opts)
+-- map('n', '<leader>o', '<cmd>LSoutlineToggle<CR>', opts)
 
 -- Float Terminal
 map('n', '<A-d>', '<Cmd>Lspsaga open_floaterm<CR>', opts)

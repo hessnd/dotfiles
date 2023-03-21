@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/nhess/.oh-my-zsh
+export ZSH=/Users/nick.hess/.oh-my-zsh
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -7,7 +7,7 @@ export ZSH=/Users/nhess/.oh-my-zsh
 ZSH_THEME="miloshadzic"
 
 # TMUX
-# Autmoatically start tmux
+# Automatically start tmux
 ZSH_TMUX_AUTOSTART=true
 
 # Uncomment the following line to use case-sensitive completion.
@@ -55,9 +55,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(git github macos tmux)
 
 # User configuration
-DEFAULT_USER="nhess"
+DEFAULT_USER="nick.hess"
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -89,14 +89,21 @@ alias code="cd ~/code"
 alias dotfiles="cd ~/dotfiles"
 alias apps="cd /Applications"
 alias dc="docker-compose"
+alias jup="cd ~/code/jupiter"
 export GIT_EDITOR="nvim"
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PACKAGE_DIRS="/Users/nhess/Code/meteor/packages"
+export PACKAGE_DIRS="/Users/nick.hess/Code/meteor/packages"
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+
+#Homebrew
+# Set PATH, MANPATH, etc., for Homebrew.
+eval "$(/opt/homebrew/bin/brew shellenv)"
+# Set PATH, MANPATH, etc., for Homebrew.
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 #PHP version
 export PATH=/usr/local/php5/bin:$PATH
@@ -108,7 +115,7 @@ export PATH="$PATH:$HOME/flutter/bin:$PATH"
 export PATH=~/apache-maven-3.5.4/bin:$PATH
 
 # Yarn
-export PATH="$PATH:$(yarn global bin)"
+# export PATH="$PATH:$(yarn global bin)"
 
 # Operator Mono to have cursives in vim
 export TERM=xterm-256color-italic
@@ -119,11 +126,14 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
 
 # bun completions
-[ -s "/Users/nhess/.bun/_bun" ] && source "/Users/nhess/.bun/_bun"
+[ -s "/Users/nick.hess/.bun/_bun" ] && source "/Users/nick.hess/.bun/_bun"
 
 # Bun
-export BUN_INSTALL="/Users/nhess/.bun"
+export BUN_INSTALL="/Users/nick.hess/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Zoxide
-eval "$(zoxide init zsh)"
+# eval "$(zoxide init zsh)"
+
+# N
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).

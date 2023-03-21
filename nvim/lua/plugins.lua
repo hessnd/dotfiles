@@ -19,7 +19,10 @@ return require('packer').startup(function(use)
   use 'nvim-lualine/lualine.nvim' -- Status Line
   use 'lewis6991/gitsigns.nvim' -- Git Signs
   use 'norcalli/nvim-colorizer.lua' -- Highlight hex and rgb colors
-  use 'nvim-tree/nvim-tree.lua' -- File Explorer
+  use {
+    'nvim-tree/nvim-tree.lua', -- File Explorer
+    tag = 'nightly'
+  }
   use 'akinsho/nvim-bufferline.lua' -- Bufferline
   use 'famiu/bufdelete.nvim' -- delete buffer without affecting layout
   use 'numToStr/Comment.nvim' -- Commenting
@@ -28,6 +31,7 @@ return require('packer').startup(function(use)
     'lukas-reineke/indent-blankline.nvim', -- indent blankline correctly
     opt = true
   }
+  use 'j-hui/fidget.nvim' -- LSP progress UI
 
   -- Integrated Terminal --
   use {
@@ -37,12 +41,12 @@ return require('packer').startup(function(use)
 
   -- CMP: Completion engine --
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lua'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'j-hui/fidget.nvim' -- LSP progress UI
 
   -- Luasnip
   use {
@@ -61,11 +65,13 @@ return require('packer').startup(function(use)
   -- Copilot
   use {
     'zbirenbaum/copilot.lua',
-    -- event = "VimEnter",
+    cmd = "Copilot",
+    event = "InsertEnter",
     config = function()
-      vim.defer_fn(function()
-        require("copilot").setup()
-      end, 100)
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
     end,
   }
   use {
@@ -100,6 +106,7 @@ return require('packer').startup(function(use)
   -- IDE Tools --
   use 'David-Kunz/jester' -- Run Jest test inside neovim
   use 'windwp/nvim-autopairs' -- Autopair brackets and parens
+  use 'dinhhuy258/git.nvim'
 
   if packer_bootstrap then
     require('packer').sync()

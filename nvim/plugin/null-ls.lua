@@ -22,7 +22,7 @@ null_ls.setup {
       diagnostics_format = '[eslint] #{m}\n(#{c})'
     }),
     null_ls.builtins.diagnostics.zsh,
-    null_ls.builtins.diagnostics.yamllint
+    -- null_ls.builtins.diagnostics.yamllint
   },
   -- Format on Save
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Formatting-on-save#sync-formatting

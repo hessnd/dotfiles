@@ -7,6 +7,8 @@ if (not bufDeleteStatus) then return end
 local fidget_status, fidget = pcall(require, "fidget")
 if (not fidget_status) then return end
 
+local git_status, git = pcall(require, "git")
+if (not git_status) then return end
 
 local map = require("utils").map
 
@@ -22,4 +24,10 @@ map('n', '<leader>x', function() bufdelete.bufdelete(0, false) end, { desc = "cl
 
 -- Fidget
 fidget.setup()
+
+-- git.setup({
+--   default_mappings = false,
+--   browse = "<leader>go",
+--   open_pull_request = "<leader>gp",
+-- })
 

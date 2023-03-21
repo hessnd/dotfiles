@@ -1,12 +1,18 @@
 local status, nvimtree = pcall(require, "nvim-tree")
 if (not status) then return end
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+local api = require("nvim-tree.api")
+
+-- Recipes: https://github.com/nvim-tree/nvim-tree.lua/wiki/Recipes
+-- Open file upon creation in nvim-tree
+api.events.subscribe(api.events.Event.FileCreated, function(file)
+  vim.cmd("edit " .. file.fname)
+end)
 
 nvimtree.setup({
   filters = {
     dotfiles = false,
+    custom = { "^.git$" }, -- https://github.com/nvim-tree/nvim-tree.lua/wiki/Tips#hide-git-directory
   },
   disable_netrw = true,
   hijack_netrw = true,

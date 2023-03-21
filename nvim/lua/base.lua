@@ -3,7 +3,11 @@ local g = vim.g
 local autocmd = vim.api.nvim_create_autocmd
 local wr_group = vim.api.nvim_create_augroup('WinResize', { clear = true })
 
-vim.o.background = "dark"
+-- disable netrw at the very start of your init.lua (strongly advised) for nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- vim.o.background = "dark"
 
 autocmd("VimResized", {
   group = wr_group,
@@ -45,8 +49,6 @@ opt.signcolumn = "yes"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
-vim.o.termguicolors = true
-g.termguicolors = true
 opt.timeoutlen = 400
 opt.undofile = true
 
@@ -61,7 +63,6 @@ g.mapleader = ","
 
 local default_providers = {
   "node",
-  "perl",
   "python3",
   "ruby",
 }

@@ -1,9 +1,7 @@
 local status, cmp = pcall(require, "cmp")
 if (not status) then return end
-local status2, lspkind = pcall(require "lspkind")
-if (not status2) then return end
-
-vim.opt.completeopt = "menuone,noselect"
+local lspkind = require("lspkind")
+local luasnip = require("luasnip")
 
 local function border(hl_name)
   return {
@@ -22,6 +20,7 @@ local cmp_window = require "cmp.utils.window"
 
 -- Copilot settings
 local has_words_before = function()
+  unpack = unpack or table.unpack
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
@@ -34,7 +33,7 @@ cmp_window.info = function(self)
   return info
 end
 
-local options = {
+cmp.setup({
   window = {
     completion = {
       border = border "CmpBorder",
@@ -52,34 +51,29 @@ local options = {
   formatting = {
     format = lspkind.cmp_format({ with_text = false, maxwidth = 50 })
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert({
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping.confirm {
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
-    },
-    ["<Tab>"] = cmp.mapping(function(fallback)
+    }),
+    ["<Tab>"] = vim.schedule_wrap(function(fallback)
       if cmp.visible() and has_words_before() then
         cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-      elseif require("luasnip").expand_or_jumpable() then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
       else
         fallback()
       end
-    end, {
-      "i",
-      "s",
-    }),
+    end),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif require("luasnip").jumpable(-1) then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end
@@ -87,17 +81,28 @@ local options = {
       "i",
       "s",
     }),
-  },
+  }),
   -- Completion sources (order matters)
-  sources = {
+  sources = cmp.config.sources({
     { name = "copilot" },
     { name = "luasnip" },
     { name = "nvim_lsp" },
     { name = "buffer" },
     { name = "nvim_lua" },
     { name = "path" },
-  },
-}
+  }),
+})
 
-cmp.setup(options)
+cmp.setup.cmdline(':', {
+  mappings = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = "path" }
+  }, {
+    { name = 'cmdline' }
+  })
+})
 
+vim.cmd [[
+  set completeopt=menuone,noinsert,noselect
+  highlight! default link CmpItemKind CmpItemMenuDefault
+]]
