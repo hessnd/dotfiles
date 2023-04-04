@@ -31,6 +31,22 @@ lspconfig.tsserver.setup {
   root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json"),
 }
 
+-- npm i -g yaml-language-server
+-- lspinstall yamlls
+lspconfig.yamlls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://json.schemastore.org/github-workflow.json"] = "/.github/*"
+      }
+    }
+  }
+}
+
+
 lspconfig.lua_ls.setup {
   on_attach = function(client, bufnr)
     on_attach(client)
