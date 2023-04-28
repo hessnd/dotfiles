@@ -19,7 +19,16 @@ map("n", "<C-k>", "<C-w>k")
 
 -- Splits
 map("n", "vv", "<cmd> :vsplit<CR>")
--- map("n", "vh", "<cmd> :split<CR>") TODO: find better keymap
+-- map("n", "hh", "<cmd> :split<CR>") -- TODO: find better keymap
+
+-- Open links under cursor with gx
+map("n", "gx", "<cmd>silent execute '!open ' . shellescape('<cWORD>')<CR>")
+
+-- Don't yank on delete char
+map("n", "x", '"_x')
+map("n", "X", '"_X')
+map("v", "x", '"_x')
+map("v", "X", '"_X')
 
 -- new buffer
 map("n", "<leader>b", "<cmd> enew <CR>", { desc = "new buffer" })
@@ -33,43 +42,14 @@ map("n", "<leader>tt", "<cmd> NvimTreeFindFile <CR>")
 map("n", "<leader>/", function() require("Comment.api").toggle.linewise.current() end)
 map("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>")
 
+-- Glance
+map("n", "gd", "<cmd>Glance definitions<CR>", { desc = "LSP Definition" })
+map("n", "gr", "<cmd>Glance references<CR>", { desc = "LSP References" })
+map("n", "gm", "<cmd>Glance implementations<CR>", { desc = "LSP Implementations" })
+map("n", "gy", "<cmd>Glance type_definitions<CR>", { desc = "LSP Type Definitions" })
+
+
 -- telescope
-map(
-  "n",
-  "<leader>ff",
-  "<cmd>Telescope find_files<CR>",
-  { desc = "find files" }
-)
-map(
-  "n",
-  "<leader>fa",
-  "<cmd>Telescope find_files follow=true no_ignore=true hidden=true <CR>",
-  { desc = "find all" }
-)
-map(
-  "n",
-  "<leader>fw",
-  "<cmd>Telescope live_grep <CR>",
-  { desc = "live grep" }
-)
-map(
-  "n",
-  "<leader>fb",
-  "<cmd>Telescope buffers <CR>",
-  { desc = "find buffers" }
-)
-map(
-  "n",
-  "<leader>fh",
-  "<cmd>Telescope help_tags <CR>",
-  { desc = "help page" }
-)
-map(
-  "n",
-  "<leader>fo",
-  "<cmd>Telescope oldfiles <CR>",
-  { desc = "find oldfiles" }
-)
 map(
   "n",
   "<leader>tk",
@@ -82,10 +62,4 @@ map(
   "<leader>cm",
   "<cmd>Telescope git_commits <CR>",
   { desc = "git commits" }
-)
-map(
-  "n",
-  "<leader>gt",
-  "<cmd>Telescope git_status <CR>",
-  { desc = "git status" }
 )

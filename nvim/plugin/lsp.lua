@@ -4,6 +4,11 @@ if (not status) then return end
 lsp.preset('recommended')
 
 lsp.ensure_installed({
+  'html',
+  'cssls',
+  'eslint',
+  'graphql',
+  'jsonls',
   'lua_ls',
   'tsserver',
   'tailwindcss',
@@ -54,8 +59,8 @@ lsp.set_preferences({
 lsp.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
-  vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-  vim.keymap.set("n", "gr", '<cmd>Telescope lsp_references<cr>', { buffer = true })
+  -- vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+  -- vim.keymap.set("n", "gr", '<cmd>Telescope lsp_references<cr>', { buffer = true })
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
   vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
@@ -72,15 +77,10 @@ lsp.format_on_save({
     timeout_ms = 1000,
   },
   servers = {
-    ['null-ls'] = { 'javascript', 'typescript', 'typescriptreact', 'lua', 'typescript.tsx' },
+    ['eslint'] = { 'javascript', 'typescript', 'typescriptreact', 'typescript.tsx' },
     ['lua_ls'] = { 'lua' },
   }
 })
-
--- require('lspconfig').tsserver.setup({
---   filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsx" },
---   root_dir = function() return vim.loop.cwd() end
--- })
 
 lsp.skip_server_setup({ 'tsserver' })
 
@@ -95,28 +95,37 @@ require('lspconfig').yamlls.setup({
   }
 })
 
+require('lspconfig').eslint.setup({
+  on_attach = require('lsp.eslint').on_attach,
+  settings = require('lsp.eslint').settings,
+})
+
+require('lspconfig').jsonls.setup({
+  settings = require('lsp.jsonls').settings,
+})
+
 lsp.setup()
 
 require('typescript').setup({
   server = {
-    on_attach = function(client, bufnr)
-      -- More commands in the documentation:
-      -- https://github.com/jose-elias-alvarez/typescript.nvim#commands
-
-      vim.keymap.set('n', '<leader>ci', '<cmd>TypescriptAddMissingImports<cr>', { buffer = bufnr })
-    end
+    capabilities = require('lsp.tsserver').capabilities,
+    handlers = require('lsp.tsserver').handlers,
+    on_attach = require('lsp.tsserver').on_attach,
+    settings = require('lsp.tsserver').settings,
   }
 })
 
 local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
-    null_ls.builtins.formatting.prettierd,
-    null_ls.builtins.diagnostics.eslint.with({
-      diagnostics_format = '[eslint] #{m}\n(#{c})'
+    require("null-ls").builtins.diagnostics.codespell.with({
+      filetypes = { "markdown", "text" },
     }),
-    null_ls.builtins.diagnostics.zsh,
-    require('typescript.extensions.null-ls.code-actions'),
+    require("typescript.extensions.null-ls.code-actions"),
+    -- null_ls.builtins.formatting.prettierd,
+    -- null_ls.builtins.diagnostics.eslint.with({
+    --   diagnostics_format = '[eslint] #{m}\n(#{c})'
+    -- }),
   }
 })
 
@@ -145,7 +154,7 @@ cmp.setup({
     { name = 'copilot' },
     { name = 'path' },
     { name = 'nvim_lsp' },
-    { name = 'buffer',  keyword_length = 3 },
+    { name = 'buffer', keyword_length = 3 },
     { name = 'luasnip', keyword_length = 2 },
   },
   mapping = {
@@ -166,8 +175,8 @@ cmp.setup({
   formatting = {
     fields = { 'abbr', 'kind', 'menu' },
     format = require('lspkind').cmp_format({
-      mode = 'symbol',       -- show only symbol annotations
-      maxwidth = 50,         -- prevent the popup from showing more than provided characters
+      mode = 'symbol', -- show only symbol annotations
+      maxwidth = 50, -- prevent the popup from showing more than provided characters
       ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead
     })
   },

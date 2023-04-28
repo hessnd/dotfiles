@@ -15,20 +15,20 @@ return require('packer').startup(function(use)
 
   -- UI --
   use 'nvim-tree/nvim-web-devicons' -- Icons
-  use 'navarasu/onedark.nvim'       -- Color Scheme
-  use 'nvim-lualine/lualine.nvim'   -- Status Line
-  use 'lewis6991/gitsigns.nvim'     -- Git Signs
+  use 'navarasu/onedark.nvim' -- Color Scheme
+  use 'nvim-lualine/lualine.nvim' -- Status Line
+  use 'lewis6991/gitsigns.nvim' -- Git Signs
   use 'norcalli/nvim-colorizer.lua' -- Highlight hex and rgb colors
   use {
-    'nvim-tree/nvim-tree.lua',      -- File Explorer
+    'nvim-tree/nvim-tree.lua', -- File Explorer
     tag = 'nightly'
   }
-  use 'akinsho/nvim-bufferline.lua'                 -- Bufferline
-  use 'famiu/bufdelete.nvim'                        -- delete buffer without affecting layout
-  use 'numToStr/Comment.nvim'                       -- Commenting
+  use 'akinsho/nvim-bufferline.lua' -- Bufferline
+  use 'famiu/bufdelete.nvim' -- delete buffer without affecting layout
+  use 'numToStr/Comment.nvim' -- Commenting
   use 'JoosepAlviste/nvim-ts-context-commentstring' -- Comment JSX properly
   use {
-    'lukas-reineke/indent-blankline.nvim',          -- indent blankline correctly
+    'lukas-reineke/indent-blankline.nvim', -- indent blankline correctly
     opt = true
   }
   use 'j-hui/fidget.nvim' -- LSP progress UI
@@ -92,15 +92,43 @@ return require('packer').startup(function(use)
       -- Snippets
       { 'L3MON4D3/LuaSnip' },
       { 'rafamadriz/friendly-snippets' },
+
+      { 'lvimuser/lsp-inlayhints.nvim' },
     }
   }
+
+
+  use({
+    "dnlhc/glance.nvim",
+    config = function()
+      require('glance').setup({
+        hooks = {
+          -- Don't open glance when there is only one result and it is located in current buffer
+          before_open = function(results, open, jump, method)
+            local uri = vim.uri_from_bufnr(0)
+            if #results == 1 then
+              local target_uri = results[1].uri or results[1].targetUri
+
+              if target_uri == uri then
+                jump(results[1])
+              else
+                open(results)
+              end
+            else
+              open(results)
+            end
+          end,
+        },
+      })
+    end,
+  })
 
   -- use ({
   --   'glepnir/lspsaga.nvim',
   --   requires = { { 'nvim-tree/nvim-web-devicons'} }
   -- })
-  use 'nvim-lua/plenary.nvim'           -- Neovim popups
-  use 'onsails/lspkind-nvim'            -- VSCode pictograms
+  use 'nvim-lua/plenary.nvim' -- Neovim popups
+  use 'onsails/lspkind-nvim' -- VSCode pictograms
   use 'jose-elias-alvarez/null-ls.nvim' -- Inject linting/formatting and other code actions
 
   -- Telescope --
@@ -108,9 +136,35 @@ return require('packer').startup(function(use)
   use 'nvim-telescope/telescope-file-browser.nvim'
 
   -- IDE Tools --
-  use 'David-Kunz/jester'     -- Run Jest test inside neovim
+  use 'David-Kunz/jester' -- Run Jest test inside neovim
   use 'windwp/nvim-autopairs' -- Autopair brackets and parens
   use 'dinhhuy258/git.nvim'
+
+  use {
+    'folke/which-key.nvim',
+    config = function()
+      require('plugins.which-key')
+    end,
+  }
+
+  use {
+    'nvim-neotest/neotest',
+    requires = {
+      { 'nvim-lua/plenary.nvim' },
+      { 'nvim-treesitter/nvim-treesitter' },
+      { 'antoinemadec/FixCursorHold.nvim' },
+      { 'haydenmeade/neotest-jest' }
+    },
+  }
+
+  -- Packer
+  use {
+    'sindrets/diffview.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function()
+      require('plugins.diffview')
+    end
+  }
 
   if packer_bootstrap then
     require('packer').sync()

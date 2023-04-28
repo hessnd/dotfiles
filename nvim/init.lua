@@ -1,4 +1,5 @@
 require('base')
 require('mappings')
-require('plugins')
+require('autocmds')
+require('config.plugins')
 require('utils')
