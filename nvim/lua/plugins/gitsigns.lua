@@ -11,7 +11,7 @@ local options = {
     changedelete = { hl = "DiffChangeDelete", text = "~", numhl = "GitSignsChangeNr" },
   },
   on_attach = function()
-    local gs = package.loaded.gitsigns
+    local gs = gitsigns
 
     map('n', '<leader>tb', gs.toggle_current_line_blame)
     map('n', '<leader>hb', function() gs.blame_line{full=true} end)

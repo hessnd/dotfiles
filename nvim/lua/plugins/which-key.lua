@@ -81,6 +81,17 @@ local opts = {
 -- }
 
 local normal_mode_mappings = {
+  c = {
+    name = 'LSP',
+    a = { 'code action' },
+    d = { '<cmd>TroubleToggle<CR>', 'local diagnostics' },
+    D = { '<cmd>Telescope diagnostics wrap_results=true<CR>', 'workspace diagnostics' },
+    f = { 'format' },
+    l = { 'line diagnostics' },
+    r = { 'rename' },
+    R = { 'structural replace' },
+    t = { '<cmd>LspToggleAutoFormat<CR>', 'toggle format on save' },
+  },
   f = {
     name = 'File',
     f = { '<cmd>Telescope find_files<CR>', 'find files' },
@@ -92,29 +103,81 @@ local normal_mode_mappings = {
   },
   g = {
     name = 'Git',
+    a = { '<cmd>!git add %:p<CR>', 'add current' },
+    A = { '<cmd>!git add .<CR>', 'add all' },
+    -- b = { '<cmd>lua require("internal.blame").open()<CR>', 'blame' },
+    B = { '<cmd>Telescope git_branches<CR>', 'branches' },
     d = { '<cmd>lua require("plugins.diffview").toggle_file_history()<CR>', 'diff file' },
     s = { '<cmd>lua require("plugins.diffview").toggle_status()<CR>', 'status' },
     S = { '<cmd>Telescope git_status<CR>', 'telescope status' },
-  }
+  },
+  s = {
+    name = 'Search',
+    c = { '<cmd>Telescope colorscheme<CR>', 'color schemes' },
+    d = { '<cmd>lua require("plugins.telescope").edit_neovim()<CR>', 'dotfiles' },
+    h = { '<cmd>Telescope oldfiles hidden=true<CR>', 'file history' },
+    H = { '<cmd>lua require("plugins.telescope").command_history()<CR>', 'command history' },
+    s = { '<cmd>Telescope search_history theme=dropdown<CR>', 'search history' },
+  },
 }
 
-wk.register(normal_mode_mappings, opts)
+local visual_mode_mappings = {
+  -- single
+  ["s"] = { "<cmd>'<,'>sort<CR>", 'sort' },
 
-wk.register({
-  j = {
-    name = "Jest",
-    f = { '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>', 'run current file' },
-    i = { '<cmd>lua require("neotest").summary.toggle()<CR>', 'toggle info panel' },
-    j = { '<cmd>lua require("neotest").run.run()<CR>', 'run nearest test' },
-    l = { '<cmd>lua require("neotest").run.run_last()<CR>', 'run last test' },
-    o = { '<cmd>lua require("neotest").output.open({ enter = true })<CR>', 'open test output' },
-    s = { '<cmd>lua require("neotest").run.stop()<CR>', 'stop' },
-  }
-}, {
-  buffer = nil,
-  mode = "n", -- NORMAL mode
-  prefix = "<leader>",
-  silent = true, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = false, -- use `nowait` when creating keymaps
-})
+  c = {
+    name = "LSP",
+    a = { 'range code action' },
+    f = { 'range format' },
+  },
+}
+
+
+wk.register(normal_mode_mappings, opts)
+wk.register(visual_mode_mappings, opts)
+
+local function attach_typescript(bufnr)
+  wk.register({
+    c = {
+      name = "LSP",
+      e = { '<cmd>TSC<CR>', 'workspace errors (TSC)' },
+      F = { '<cmd>TypescriptFixAll<CR>', 'fix all' },
+      i = { '<cmd>TypescriptAddMissingImports<CR>', 'import all' },
+      o = { '<cmd>TypescriptOrganizeImports<CR>', 'organize imports' },
+      u = { '<cmd>TypescriptRemoveUnused<CR>', 'remove unused' },
+    }
+  }, {
+    buffer = bufnr,
+    mode = "n", -- NORMAL mode
+    prefix = "<leader>",
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = false, -- use `nowait` when creating keymaps
+  })
+end
+
+local function attach_jest(bufnr)
+  wk.register({
+    j = {
+      name = "Jest",
+      f = { '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>', 'run current file' },
+      i = { '<cmd>lua require("neotest").summary.toggle()<CR>', 'toggle info panel' },
+      j = { '<cmd>lua require("neotest").run.run()<CR>', 'run nearest test' },
+      l = { '<cmd>lua require("neotest").run.run_last()<CR>', 'run last test' },
+      o = { '<cmd>lua require("neotest").output.open({ enter = true })<CR>', 'open test output' },
+      s = { '<cmd>lua require("neotest").run.stop()<CR>', 'stop' },
+    }
+  }, {
+    buffer = bufnr,
+    mode = "n", -- NORMAL mode
+    prefix = "<leader>",
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = false, -- use `nowait` when creating keymaps
+  })
+end
+
+return {
+  attach_jest = attach_jest,
+  attach_typescript = attach_typescript,
+}

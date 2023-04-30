@@ -26,7 +26,6 @@ nvimtree.setup({
     adaptive_size = true,
     side = "left",
     width = 25,
-    hide_root_folder = true,
   },
   filesystem_watchers = {
     enable = true,
@@ -37,6 +36,7 @@ nvimtree.setup({
     }
   },
   renderer = {
+    root_folder_label = false,
     icons = {
       show = {
         file = true,

@@ -19,10 +19,17 @@ autocmd("VimResized", {
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 opt.background = 'dark'
+opt.cmdheight = 0
+opt.completeopt = "menu,menuone,noselect" --- Better autocompletion
 
+opt.foldcolumn = "0"
+opt.foldnestmax = 0
+opt.foldlevel = 99 --- Using ufo provider need a large value
+opt.foldlevelstart = 99 --- Expand all folds by default
 opt.title = true
-opt.clipboard = "unnamedplus"
+opt.clipboard = "unnamed,unnamedplus"
 opt.cursorline = true
+opt.emoji = true
 
 -- Indenting
 opt.expandtab = true
@@ -30,6 +37,8 @@ opt.shiftwidth = 2
 opt.smartindent = true
 opt.tabstop = 2
 opt.softtabstop = 2
+opt.showtabline = 2
+opt.smarttab = true
 
 opt.fillchars = { eob = " " }
 opt.ignorecase = true
@@ -45,11 +54,11 @@ opt.ruler = false
 opt.shortmess:append "sI"
 
 opt.scrolloff = 8
-opt.signcolumn = "yes"
+opt.signcolumn = "yes:2"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
-opt.timeoutlen = 400
+opt.timeoutlen = 200
 opt.undofile = true
 
 -- interval for writing swap file to disk, also used by gitsigns

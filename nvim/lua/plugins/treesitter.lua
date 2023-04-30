@@ -19,13 +19,14 @@ local options = {
   },
   indent = {
     enable = true,
-    disable = {},
   },
   ensure_installed = {
     "lua",
     "toml",
     "tsx",
-    "json",
+    "typescript",
+    "javascript",
+    "gitcommit",
     "css",
     "json",
     "html",
@@ -34,9 +35,9 @@ local options = {
     "markdown",
     "markdown_inline",
   },
-  autotag = {
-    enable = true,
-  },
+  -- autotag = {
+  --   enable = true,
+  -- },
   context_commentstring = {
     enable = true,
     enable_autocmd = false,
