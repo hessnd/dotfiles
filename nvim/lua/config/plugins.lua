@@ -135,10 +135,21 @@ return {
       {
         "zbirenbaum/copilot-cmp",
         config = function()
-          require("copilot_cmp").setup()
+          require("copilot_cmp").setup({
+            formatters = {
+              insert_text = require('copilot_cmp.format').remove_existing
+            }
+          })
         end,
       },
     },
+  },
+  {
+    "folke/trouble.nvim",
+    cmd = { "TroubleToggle", "Trouble" },
+    config = function()
+      require("plugins.trouble")
+    end,
   },
   { "jose-elias-alvarez/typescript.nvim" },
   {
@@ -161,20 +172,26 @@ return {
           if #results == 1 then
             jump(results[1]) -- argument is optional
           else
-            open(results) -- argument is optional
+            open(results)    -- argument is optional
           end
         end,
       },
     },
     cmd = { "Glance" },
     keys = {
-      { "gd", "<cmd>Glance definitions<CR>", desc = "LSP Definition" },
-      { "gr", "<cmd>Glance references<CR>", desc = "LSP References" },
-      { "gm", "<cmd>Glance implementations<CR>", desc = "LSP Implementations" },
+      { "gd", "<cmd>Glance definitions<CR>",      desc = "LSP Definition" },
+      { "gr", "<cmd>Glance references<CR>",       desc = "LSP References" },
+      { "gm", "<cmd>Glance implementations<CR>",  desc = "LSP Implementations" },
       { "gy", "<cmd>Glance type_definitions<CR>", desc = "LSP Type Definitions" },
     },
   },
-  { "tpope/vim-repeat", lazy = false },
+  { "tpope/vim-repeat",       lazy = false },
+  {
+    "airblade/vim-rooter",
+    setup = function()
+      vim.g.rooter_patterns = { ".git", "package.json", "yarn.lock", ".eslintrc.js", "jest.config.js" }
+    end,
+  },
   { "kylechui/nvim-surround", lazy = false, config = true },
   {
     "kevinhwang91/nvim-ufo",
@@ -288,6 +305,7 @@ return {
   },
   {
     'famiu/bufdelete.nvim',
+    lazy = false,
     config = function()
       vim.keymap.set('n', '<leader>x', function() require('bufdelete').bufdelete(0, false) end, { desc = "close buffer" })
     end,
@@ -301,7 +319,7 @@ return {
   },
   { 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Comment JSX properly
   {
-    'lukas-reineke/indent-blankline.nvim', -- indent blankline correctly
+    'lukas-reineke/indent-blankline.nvim',           -- indent blankline correctly
     lazy = true,
     config = function()
       require("plugins.blankline")
@@ -330,7 +348,13 @@ return {
   -- })
 
   -- IDE Tools --
-  -- { 'David-Kunz/jester' }, -- Run Jest test inside neovim
+  {
+    'David-Kunz/jester',
+    lazy = false,
+    config = function()
+      require("plugins.jester")
+    end,
+  },
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
@@ -350,6 +374,7 @@ return {
 
   {
     'nvim-neotest/neotest',
+    enabled = false,
     dependencies = {
       { 'nvim-lua/plenary.nvim' },
       { 'nvim-treesitter/nvim-treesitter' },

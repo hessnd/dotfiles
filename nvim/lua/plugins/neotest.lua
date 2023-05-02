@@ -6,7 +6,8 @@ end
 neotest.setup({
   adapters = {
     require("neotest-jest")({
-      jestCommand = "yarn test ",
+      jestCommand = "yarn test --",
+      jestConfigFile = "jest.config.js",
       env = { CI = true },
       cwd = function(path)
         return vim.fn.getcwd()
@@ -17,7 +18,6 @@ neotest.setup({
     enabled = false
   },
   floating = {
-    -- border = EcoVim.ui.float.border or "rounded",
     border = "rounded",
     max_height = 0.6,
     max_width = 0.6

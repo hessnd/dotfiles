@@ -19,8 +19,6 @@ mason.setup({
 mason_lsp.setup({
   -- A list of servers to automatically install if they're not already installed
   ensure_installed = {
-    "bashls",
-    "cssls",
     "eslint",
     "graphql",
     "html",
@@ -29,7 +27,6 @@ mason_lsp.setup({
     "lua_ls",
     "tailwindcss",
     "tsserver",
-    "prismals",
   },
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -72,7 +69,7 @@ capabilities.textDocument.foldingRange = {
 if typescript_ok then
   typescript.setup({
     disable_commands = false, -- prevent the plugin from creating Vim commands
-    debug = false, -- enable debug logging for commands
+    debug = false,            -- enable debug logging for commands
     -- LSP Config options
     server = {
       capabilities = require("lsp.servers.tsserver").capabilities,
