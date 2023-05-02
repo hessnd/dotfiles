@@ -1,8 +1,19 @@
 return {
   {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- load the colorscheme here
+      vim.cmd([[colorscheme tokyonight]])
+      require("config.colorscheme")
+    end,
+  },
+  {
     "navarasu/onedark.nvim",
     lazy = false,
     priority = 1000,
+    enabled = false,
     config = function()
       local onedark = require('onedark')
       onedark.setup {
@@ -172,20 +183,20 @@ return {
           if #results == 1 then
             jump(results[1]) -- argument is optional
           else
-            open(results)    -- argument is optional
+            open(results) -- argument is optional
           end
         end,
       },
     },
     cmd = { "Glance" },
     keys = {
-      { "gd", "<cmd>Glance definitions<CR>",      desc = "LSP Definition" },
-      { "gr", "<cmd>Glance references<CR>",       desc = "LSP References" },
-      { "gm", "<cmd>Glance implementations<CR>",  desc = "LSP Implementations" },
+      { "gd", "<cmd>Glance definitions<CR>", desc = "LSP Definition" },
+      { "gr", "<cmd>Glance references<CR>", desc = "LSP References" },
+      { "gm", "<cmd>Glance implementations<CR>", desc = "LSP Implementations" },
       { "gy", "<cmd>Glance type_definitions<CR>", desc = "LSP Type Definitions" },
     },
   },
-  { "tpope/vim-repeat",       lazy = false },
+  { "tpope/vim-repeat", lazy = false },
   {
     "airblade/vim-rooter",
     setup = function()
@@ -319,7 +330,7 @@ return {
   },
   { 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Comment JSX properly
   {
-    'lukas-reineke/indent-blankline.nvim',           -- indent blankline correctly
+    'lukas-reineke/indent-blankline.nvim', -- indent blankline correctly
     lazy = true,
     config = function()
       require("plugins.blankline")

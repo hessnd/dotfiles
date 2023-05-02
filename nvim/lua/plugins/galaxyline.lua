@@ -4,7 +4,6 @@
 local gl = require('galaxyline')
 local condition = require('galaxyline.condition')
 local utils = require('utils')
-local onedark_colors = require("onedark.colors")
 local package_info_present, package = pcall(require, 'package-info')
 
 -- Configuration {{{1
@@ -680,4 +679,3 @@ table.insert(gls.short_line_right, {
   }
 })
 -- }}}1
-
