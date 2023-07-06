@@ -27,6 +27,7 @@ mason_lsp.setup({
     "lua_ls",
     "tailwindcss",
     "tsserver",
+    "svelte",
   },
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -69,7 +70,7 @@ capabilities.textDocument.foldingRange = {
 if typescript_ok then
   typescript.setup({
     disable_commands = false, -- prevent the plugin from creating Vim commands
-    debug = false,            -- enable debug logging for commands
+    debug = false, -- enable debug logging for commands
     -- LSP Config options
     server = {
       capabilities = require("lsp.servers.tsserver").capabilities,
@@ -117,7 +118,7 @@ lspconfig.yamlls.setup({
   settings = require("lsp.servers.yamlls").settings,
 })
 
-for _, server in ipairs({ "graphql" }) do
+for _, server in ipairs({ "graphql", "svelte" }) do
   lspconfig[server].setup({
     on_attach = on_attach,
     capabilities = capabilities,
