@@ -12,6 +12,8 @@ if not snip_status_ok then
   return
 end
 
+local copilot_status_ok, copilot_cmp_comparators = pcall(require, "copilot_cmp.comparators")
+
 require("luasnip/loaders/from_vscode").lazy_load()
 
 -- ╭──────────────────────────────────────────────────────────╮
@@ -81,7 +83,7 @@ local function get_lsp_completion_context(completion, source)
   if not ok then
     return nil
   end
-  if source_name == "tsserver" then
+  if source_name == "tsserver" or source_name == "typescript-tools" then
     return completion.detail
   elseif source_name == "pyright" then
     if completion.labelDetails ~= nil then
@@ -217,6 +219,14 @@ cmp.setup({
         item_with_kind.menu = item_with_kind.menu .. [[ -> ]] .. completion_context
       end
 
+      if string.find(vim_item.kind, "Color") then
+        -- Override for plugin purposes
+        vim_item.kind = "Color"
+        local tailwind_item = require("cmp-tailwind-colors").format(entry, vim_item)
+        item_with_kind.menu = lspkind.symbolic("Color", { with_text = false }) .. " Color"
+        item_with_kind.kind = " " .. tailwind_item.kind
+      end
+
       return item_with_kind
     end,
   },
@@ -242,7 +252,7 @@ cmp.setup({
       deprioritize_snippet,
       cmp.config.compare.exact,
       cmp.config.compare.locality,
-      require("copilot_cmp.comparators").prioritize,
+      copilot_cmp_comparators.prioritize or function() end,
       cmp.config.compare.score,
       cmp.config.compare.recently_used,
       cmp.config.compare.offset,
@@ -265,4 +275,7 @@ cmp.setup({
   experimental = {
     ghost_text = true,
   },
+  performance = {
+    max_view_entries = 100,
+  }
 })

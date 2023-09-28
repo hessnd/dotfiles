@@ -3,7 +3,7 @@ local typescript_ok, typescript = pcall(require, "typescript")
 local mason_ok, mason = pcall(require, "mason")
 local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
 local lsp_functions = require("lsp.functions")
-local ufo_config_handler = require("plugins.nvim-ufo").handler
+-- local ufo_config_handler = require("plugins.nvim-ufo").handler
 
 if not mason_ok or not mason_lsp_ok then
   return
@@ -21,12 +21,15 @@ mason_lsp.setup({
   ensure_installed = {
     "eslint",
     "graphql",
+    "cssls",
     "html",
     "yamlls",
     "jsonls",
     "lua_ls",
     "tailwindcss",
     "tsserver",
+    "bashls",
+    "kotlin_language_server",
   },
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -54,6 +57,10 @@ local handlers = {
 
 local function on_attach(client, bufnr)
   -- set up buffer keymaps, etc.
+  -- if client.name == "yamlls" then
+  --   -- lsp_functions.disable_format_on_save()
+  --   lsp_functions.enable_format_on_save()
+  -- end
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -65,21 +72,6 @@ capabilities.textDocument.foldingRange = {
 
 -- Order matters
 
--- It enables tsserver automatically so no need to call lspconfig.tsserver.setup
-if typescript_ok then
-  typescript.setup({
-    disable_commands = false, -- prevent the plugin from creating Vim commands
-    debug = false,            -- enable debug logging for commands
-    -- LSP Config options
-    server = {
-      capabilities = require("lsp.servers.tsserver").capabilities,
-      handlers = require("lsp.servers.tsserver").handlers,
-      on_attach = require("lsp.servers.tsserver").on_attach,
-      settings = require("lsp.servers.tsserver").settings,
-    },
-  })
-end
-
 lspconfig.tailwindcss.setup({
   capabilities = require("lsp.servers.tailwindcss").capabilities,
   filetypes = require("lsp.servers.tailwindcss").filetypes,
@@ -87,6 +79,13 @@ lspconfig.tailwindcss.setup({
   init_options = require("lsp.servers.tailwindcss").init_options,
   on_attach = require("lsp.servers.tailwindcss").on_attach,
   settings = require("lsp.servers.tailwindcss").settings,
+})
+
+lspconfig.cssls.setup({
+  capabilities = capabilities,
+  handlers = handlers,
+  on_attach = require("lsp.servers.cssls").on_attach,
+  settings = require("lsp.servers.cssls").settings,
 })
 
 lspconfig.eslint.setup({
@@ -117,7 +116,7 @@ lspconfig.yamlls.setup({
   settings = require("lsp.servers.yamlls").settings,
 })
 
-for _, server in ipairs({ "graphql" }) do
+for _, server in ipairs({ "graphql", "bashls", "html", "kotlin_language_server" }) do
   lspconfig[server].setup({
     on_attach = on_attach,
     capabilities = capabilities,
@@ -125,9 +124,7 @@ for _, server in ipairs({ "graphql" }) do
   })
 end
 
-lsp_functions.enable_format_on_save(true)
-
-require("ufo").setup({
-  fold_virt_text_handler = ufo_config_handler,
-  close_fold_kinds = {},
-})
+-- require("ufo").setup({
+--   fold_virt_text_handler = ufo_config_handler,
+--   close_fold_kinds = {},
+-- })

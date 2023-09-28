@@ -2,8 +2,8 @@
 --   ensure_installed = {
 --     -- Opt to list sources here, when available in mason.
 --   },
---   automatic_installation = true,
---   automatic_setup = false, -- Recommended, but optional
+--   automatic_installation = false,
+--   automatic_setup = true, -- Recommended, but optional
 --   handlers = {},
 -- })
 

@@ -53,6 +53,24 @@ return {
       "RRethy/nvim-treesitter-textsubjects",
     },
   },
+  -- Navigating (Telescope/Tree/Refactor)
+  {
+    "nvim-pack/nvim-spectre",
+    lazy = true,
+    keys = {
+      {
+        "<Leader>pr",
+        "<cmd>lua require('spectre').open_visual({select_word=true})<CR>",
+        desc = "refactor",
+      },
+      {
+        "<Leader>pr",
+        "<cmd>lua require('spectre').open_visual()<CR>",
+        mode = "v",
+        desc = "refactor",
+      }
+    }
+  },
   {
     "nvim-telescope/telescope.nvim",
     lazy = false,
@@ -63,8 +81,8 @@ return {
       { 'nvim-telescope/telescope-file-browser.nvim' },
       { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
-      -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      -- { "cljoly/telescope-repo.nvim" },
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      { "cljoly/telescope-repo.nvim" },
     },
   },
   {
@@ -80,6 +98,11 @@ return {
     config = function()
       require("plugins.nvimtree")
     end,
+  },
+  {
+    "gbprod/stay-in-place.nvim",
+    lazy = false,
+    config = true, -- run require("stay-in-place").setup()
   },
   -- LSP Base
   {
@@ -99,25 +122,6 @@ return {
       { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
     },
   },
-
-  -- Formatters
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "BufNewFile",
-    dependencies = { "mason.nvim" },
-  },
-  {
-    "jay-babu/mason-null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
-    },
-    config = function()
-      require("plugins.null-ls")
-    end,
-  },
-
   -- LSP Cmp
   {
     "hrsh7th/nvim-cmp",
@@ -145,15 +149,45 @@ return {
       },
       {
         "zbirenbaum/copilot-cmp",
-        config = function()
-          require("copilot_cmp").setup({
-            formatters = {
-              insert_text = require('copilot_cmp.format').remove_existing
-            }
-          })
+        config = function ()
+          require("copilot_cmp").setup()
+        -- config = function()
+        --   require("copilot_cmp").setup({
+        --     formatters = {
+        --       insert_text = require('copilot_cmp.format').remove_existing
+        --     }
+        --   })
         end,
       },
     },
+  },
+
+  -- Formatters
+  -- {
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   event = "BufNewFile",
+  --   dependencies = { "mason.nvim" },
+  -- },
+  -- {
+  --   "jay-babu/mason-null-ls.nvim",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   dependencies = {
+  --     "williamboman/mason.nvim",
+  --     "jose-elias-alvarez/null-ls.nvim",
+  --   },
+  --   config = function()
+  --     require("plugins.null-ls")
+  --   end,
+  -- },
+
+  -- LSP addons
+  {
+    "stevearc/dressing.nvim",
+    event = "VeryLazy",
+    dependencies = "MunifTanjim/nui.nvim",
+    config = function()
+      require("plugins.dressing")
+    end,
   },
   {
     "folke/trouble.nvim",
@@ -162,7 +196,26 @@ return {
       require("plugins.trouble")
     end,
   },
-  { "jose-elias-alvarez/typescript.nvim" },
+  { "nvim-lua/popup.nvim" },
+  {
+    "SmiteshP/nvim-navic",
+    config = function()
+      require("plugins.navic")
+    end,
+    dependencies = "neovim/nvim-lspconfig",
+  },
+  {
+    "pmizio/typescript-tools.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    ft = { "typescript", "typescriptreact" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "neovim/nvim-lspconfig",
+    },
+    config = function()
+      require("plugins.typescript-tools")
+    end,
+  },
   {
     "axelvc/template-string.nvim",
     event = "InsertEnter",
@@ -175,6 +228,11 @@ return {
     config = true, -- run require("template-string").setup()
   },
   {
+    "dmmulroy/tsc.nvim",
+    cmd = { "TSC" },
+    config = true,
+  },
+  {
     "dnlhc/glance.nvim",
     config = true,
     opts = {
@@ -183,20 +241,31 @@ return {
           if #results == 1 then
             jump(results[1]) -- argument is optional
           else
-            open(results) -- argument is optional
+            open(results)    -- argument is optional
           end
         end,
       },
     },
     cmd = { "Glance" },
     keys = {
-      { "gd", "<cmd>Glance definitions<CR>", desc = "LSP Definition" },
-      { "gr", "<cmd>Glance references<CR>", desc = "LSP References" },
-      { "gm", "<cmd>Glance implementations<CR>", desc = "LSP Implementations" },
+      { "gd", "<cmd>Glance definitions<CR>",      desc = "LSP Definition" },
+      { "gr", "<cmd>Glance references<CR>",       desc = "LSP References" },
+      { "gm", "<cmd>Glance implementations<CR>",  desc = "LSP Implementations" },
       { "gy", "<cmd>Glance type_definitions<CR>", desc = "LSP Type Definitions" },
     },
   },
-  { "tpope/vim-repeat", lazy = false },
+  {
+    "antosha417/nvim-lsp-file-operations",
+    event = "LspAttach",
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-tree/nvim-tree.lua" },
+    },
+    config = function()
+      require("lsp-file-operations").setup()
+    end
+  },
+  { "tpope/vim-repeat",       lazy = false },
   {
     "airblade/vim-rooter",
     setup = function()
@@ -206,6 +275,7 @@ return {
   { "kylechui/nvim-surround", lazy = false, config = true },
   {
     "kevinhwang91/nvim-ufo",
+    enabled = false,
     dependencies = "kevinhwang91/promise-async",
     config = function()
       vim.keymap.set("n", "zR", require("ufo").openAllFolds)
@@ -213,59 +283,83 @@ return {
       vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
     end,
   },
-  -- LSP --
-  -- {
-  --   'VonHeikemen/lsp-zero.nvim',
-  --   branch = 'v2.x',
-  --   -- event = "BufReadPre",
-  --   config = function()
-  --     require('plugins.lsp')
-  --   end,
-  --   dependencies = {
-  --     -- LSP Support
-  --     { 'neovim/nvim-lspconfig' },
-  --     { 'williamboman/mason.nvim' },
-  --     { 'williamboman/mason-lspconfig.nvim' },
-  --     { 'jay-babu/mason-null-ls.nvim' },
-  --     { 'jose-elias-alvarez/typescript.nvim' },
-  --
-  --     -- Autocompletion
-  --     { 'hrsh7th/nvim-cmp' },
-  --     { 'hrsh7th/cmp-buffer' },
-  --     { 'hrsh7th/cmp-path' },
-  --     { 'saadparwaiz1/cmp_luasnip' },
-  --     { 'hrsh7th/cmp-nvim-lsp' },
-  --     { 'hrsh7th/cmp-nvim-lua' },
-  --     -- {
-  --     --   'zbirenbaum/copilot-cmp',
-  --     --   dependencies = { 'copilot.lua' },
-  --     --   config = function()
-  --     --     require('copilot_cmp').setup({
-  --     --       formatters = {
-  --     --         insert_text = require('copilot_cmp.format').remove_existing
-  --     --       }
-  --     --     })
-  --     --   end
-  --     -- },
-  --
-  --     -- Snippets
-  --     { 'L3MON4D3/LuaSnip' },
-  --     { 'rafamadriz/friendly-snippets' },
-  --
-  --     -- {
-  --     --   'lvimuser/lsp-inlayhints.nvim',
-  --     --   branch = "main", -- or "anticonceal"
-  --     --   config = function()
-  --     --     require("plugins.inlay-hints")
-  --     --   end,
-  --     -- },
-  --   }
-  -- },
   {
     'lvimuser/lsp-inlayhints.nvim',
     branch = "main", -- or "anticonceal"
     config = function()
       require("plugins.inlay-hints")
+    end,
+  },
+  -- Git
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "BufRead",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("plugins.git.signs")
+    end,
+    keys = {
+      { "<Leader>ghd", desc = "diff hunk" },
+      { "<Leader>ghp", desc = "preview" },
+      { "<Leader>ghR", desc = "reset buffer" },
+      { "<Leader>ghr", desc = "reset hunk" },
+      { "<Leader>ghs", desc = "stage hunk" },
+      { "<Leader>ghS", desc = "stage buffer" },
+      { "<Leader>ght", desc = "toggle deleted" },
+      { "<Leader>ghu", desc = "undo stage" },
+    }
+  },
+  {
+    "sindrets/diffview.nvim",
+    lazy = true,
+    enabled = true,
+    event = "BufRead",
+    config = function()
+      require("plugins.git.diffview")
+    end,
+    keys = {
+      { "<Leader>gd", "<cmd>lua require('plugins.git.diffview').toggle_file_history()<CR>", desc = "diff file" },
+      { "<Leader>gs", "<cmd>lua require('plugins.git.diffview').toggle_status()<CR>",       desc = "status" }
+    },
+  },
+  {
+    "akinsho/git-conflict.nvim",
+    lazy = false,
+    config = function()
+      require("plugins.git.conflict")
+    end,
+    keys = {
+      { "<Leader>gcb", '<cmd>GitConflictChooseBoth<CR>',   desc = 'choose both' },
+      { "<Leader>gcn", '<cmd>GitConflictNextConflict<CR>', desc = 'move to next conflict' },
+      { "<Leader>gco", '<cmd>GitConflictChooseOurs<CR>',   desc = 'choose ours' },
+      { "<Leader>gcp", '<cmd>GitConflictPrevConflict<CR>', desc = 'move to prev conflict' },
+      { "<Leader>gct", '<cmd>GitConflictChooseTheirs<CR>', desc = 'choose theirs' },
+    }
+  },
+  {
+    "ThePrimeagen/git-worktree.nvim",
+    lazy = false,
+    config = function()
+      require("plugins.git.worktree")
+    end,
+    keys = {
+      { "<Leader>gww", desc = "worktrees" },
+      { "<Leader>gwc", desc = "create worktree" }
+    }
+  },
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitCurrentFile",
+      "LazyGitFilterCurrentFile",
+      "LazyGitFilter",
+    },
+    keys = {
+      { "<Leader>gg", "<cmd>LazyGit<CR>", desc = "lazygit" },
+    },
+    config = function()
+      vim.g.lazygit_floating_window_scaling_factor = 1
     end,
   },
   -- Copilot
@@ -295,13 +389,6 @@ return {
     enabled = false,
   },
   {
-    'lewis6991/gitsigns.nvim',
-    lazy = false,
-    config = function()
-      require('plugins.gitsigns')
-    end,
-  },
-  {
     "NvChad/nvim-colorizer.lua",
     config = function()
       require("plugins.colorizer")
@@ -324,13 +411,14 @@ return {
   {
     'numToStr/Comment.nvim',
     lazy = false,
+    branch = "jsx",
     config = function()
       require("plugins.comment")
     end,
   },
   { 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Comment JSX properly
   {
-    'lukas-reineke/indent-blankline.nvim', -- indent blankline correctly
+    'lukas-reineke/indent-blankline.nvim',           -- indent blankline correctly
     lazy = true,
     config = function()
       require("plugins.blankline")
@@ -367,6 +455,24 @@ return {
     end,
   },
   {
+    "chrisgrieser/nvim-spider",
+    -- cond = EcoVim.plugins.jump_by_subwords.enabled,
+    lazy = true,
+    keys = { "w", "e", "b", "ge" },
+    config = function()
+      vim.keymap.set({ "n", "o", "x" }, "W", "w", { desc = "Normal w" })
+      vim.keymap.set({ "n", "o", "x" }, "w", "<cmd>lua require('spider').motion('w')<CR>", { desc = "Spider-w" })
+      vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<CR>", { desc = "Spider-e" })
+      vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>", { desc = "Spider-b" })
+      vim.keymap.set(
+        { "n", "o", "x" },
+        "ge",
+        "<cmd>lua require('spider').motion('ge')<CR>",
+        { desc = "Spider-ge" }
+      )
+    end,
+  },
+  {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     config = function()
@@ -386,6 +492,7 @@ return {
   {
     'nvim-neotest/neotest',
     enabled = false,
+    lazy = true,
     dependencies = {
       { 'nvim-lua/plenary.nvim' },
       { 'nvim-treesitter/nvim-treesitter' },
@@ -398,16 +505,8 @@ return {
   },
 
   {
-    'sindrets/diffview.nvim',
-    lazy = true,
-    enabled = false,
-    event = "BufRead",
-    config = function()
-      require('plugins.diffview')
-    end
-  },
-  {
     "andythigpen/nvim-coverage",
+    enabled = false,
     dependencies = "nvim-lua/plenary.nvim",
     cmd = {
       "Coverage",

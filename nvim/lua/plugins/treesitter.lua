@@ -3,16 +3,17 @@ if not status then return end
 
 -- brew install treesitter
 
-local jsx_comment = {
-  __default = '// %s',
-  jsx_element = '{/* %s */}',
-  jsx_fragment = '{/* %s */}',
-  jsx_attribute = '// %s',
-  comment = '// %s',
-  __multiline = '/* %s */',
-}
+-- local jsx_comment = {
+--   __default = '// %s',
+--   jsx_element = '{/* %s */}',
+--   jsx_fragment = '{/* %s */}',
+--   jsx_attribute = '// %s',
+--   comment = '// %s',
+--   __multiline = '/* %s */',
+-- }
 
 local options = {
+  sync_install = false,
   highlight = {
     enable = true,
     disable = {},
@@ -21,34 +22,36 @@ local options = {
     enable = true,
   },
   ensure_installed = {
-    "lua",
-    "toml",
     "tsx",
     "typescript",
     "javascript",
-    "gitcommit",
-    "css",
-    "json",
     "html",
+    "css",
+    "gitcommit",
     "graphql",
-    "kotlin",
+    "json",
+    "json5",
+    "lua",
     "markdown",
     "markdown_inline",
+    "toml",
+    "kotlin",
+    "vim",
   },
   -- autotag = {
   --   enable = true,
   -- },
   context_commentstring = {
     enable = true,
-    enable_autocmd = false,
-    config = {
-      javascript = jsx_comment,
-      typescript = jsx_comment,
-    }
+    enable_autocmd = true,
+    -- config = {
+    --   javascript = jsx_comment,
+    --   typescript = jsx_comment,
+    -- }
   },
 }
 
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.tsx.filetype_to_parsename = { "javascript", "typescript.tsx" }
+-- local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+-- parser_config.tsx.filetype_to_parsename = { "javascript", "typescript.tsx" }
 
 treesitter.setup(options)

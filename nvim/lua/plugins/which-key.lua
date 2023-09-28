@@ -95,7 +95,7 @@ local normal_mode_mappings = {
   },
   f = {
     name = 'File',
-    f = { '<cmd>Telescope find_files<CR>', 'find files' },
+    f = { '<cmd>lua require("plugins.telescope").project_files({ hidden = true, search_dirs = {"!.git/*","!.yarn/*"}})<CR>', 'find files' },
     a = { '<cmd>Telescope find_files follow=true no_ignore=true hidden=true <CR>', 'find all' },
     b = { '<cmd>Telescope buffers<CR>', 'buffers' },
     w = { '<cmd>Telescope live_grep<CR>', 'grep' },
@@ -181,7 +181,56 @@ local function attach_jest(bufnr)
   })
 end
 
+local function attach_spectre(bufnr)
+  wk.register({
+    ["R"] = { '[SPECTRE] Replace all'},
+    ["o"] = { '[SPECTRE] Show options'},
+    ["q"] = { '[SPECTRE] Send all to quicklist'},
+    ["v"] = { '[SPECTRE] Change view mode'},
+  }, {
+    buffer = bufnr,
+    mode = "n", -- NORMAL mode
+    prefix = "<leader>",
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = false, -- use `nowait` when creating keymaps
+  })
+end
+
+local function attach_nvim_tree(bufnr)
+  wk.register({
+    ["="] = { "<cmd>NvimTreeResize +5<CR>", "resize +5" },
+    ["-"] = { "<cmd>NvimTreeResize -5<CR>", "resize +5" },
+  }, {
+    buffer = bufnr,
+    mode = "n",   -- NORMAL mode
+    prefix = "<leader>",
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = false, -- use `nowait` when creating keymaps
+  })
+end
+
+local function attach_markdown(bufnr)
+  wk.register({
+    a = {
+      name = "Actions",
+      m = { '<cmd>MarkdownPreviewToggle<CR>', 'markdown preview' },
+    }
+  }, {
+    buffer = bufnr ,
+    mode = "n", -- NORMAL mode
+    prefix = "<leader>",
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = false, -- use `nowait` when creating keymaps
+  })
+end
+
 return {
+  attach_markdown = attach_markdown,
   attach_jest = attach_jest,
   attach_typescript = attach_typescript,
+  attach_spectre = attach_spectre,
+  attach_nvim_tree = attach_nvim_tree,
 }
