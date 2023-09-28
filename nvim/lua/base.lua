@@ -7,8 +7,6 @@ local wr_group = vim.api.nvim_create_augroup('WinResize', { clear = true })
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- vim.o.background = "dark"
-
 autocmd("VimResized", {
   group = wr_group,
   pattern = "*",
@@ -24,7 +22,7 @@ opt.completeopt = "menu,menuone,noselect" --- Better autocompletion
 
 opt.foldcolumn = "0"
 opt.foldnestmax = 0
-opt.foldlevel = 99 --- Using ufo provider need a large value
+opt.foldlevel = 99      --- Using ufo provider need a large value
 opt.foldlevelstart = 99 --- Expand all folds by default
 opt.title = true
 opt.clipboard = "unnamed,unnamedplus"
@@ -55,9 +53,13 @@ opt.shortmess:append "sI"
 
 opt.scrolloff = 8
 opt.signcolumn = "yes:2"
+
+-- Splits
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
+
+-- Startup Timeout
 opt.timeoutlen = 200
 opt.undofile = true
 

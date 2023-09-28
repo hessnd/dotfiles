@@ -30,6 +30,7 @@ mason_lsp.setup({
     "tsserver",
     "bashls",
     "kotlin_language_server",
+    "svelte",
   },
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -72,6 +73,24 @@ capabilities.textDocument.foldingRange = {
 
 -- Order matters
 
+<<<<<<< HEAD
+=======
+-- It enables tsserver automatically so no need to call lspconfig.tsserver.setup
+if typescript_ok then
+  typescript.setup({
+    disable_commands = false, -- prevent the plugin from creating Vim commands
+    debug = false, -- enable debug logging for commands
+    -- LSP Config options
+    server = {
+      capabilities = require("lsp.servers.tsserver").capabilities,
+      handlers = require("lsp.servers.tsserver").handlers,
+      on_attach = require("lsp.servers.tsserver").on_attach,
+      settings = require("lsp.servers.tsserver").settings,
+    },
+  })
+end
+
+>>>>>>> 7cc19a0e4edf87ea820cd5c4460c6f2f661e3482
 lspconfig.tailwindcss.setup({
   capabilities = require("lsp.servers.tailwindcss").capabilities,
   filetypes = require("lsp.servers.tailwindcss").filetypes,
@@ -116,7 +135,7 @@ lspconfig.yamlls.setup({
   settings = require("lsp.servers.yamlls").settings,
 })
 
-for _, server in ipairs({ "graphql", "bashls", "html", "kotlin_language_server" }) do
+for _, server in ipairs({ "graphql", "bashls", "html", "kotlin_language_server", "svelte" }) do
   lspconfig[server].setup({
     on_attach = on_attach,
     capabilities = capabilities,

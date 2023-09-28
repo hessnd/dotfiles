@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/nick.hess/.oh-my-zsh
+export ZSH=/Users/nhess/.oh-my-zsh
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -55,7 +55,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(git github macos tmux)
 
 # User configuration
-DEFAULT_USER="nick.hess"
+DEFAULT_USER="nhess"
 
 export PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -96,14 +96,12 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 # eval "$(rbenv init -)"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PACKAGE_DIRS="/Users/nick.hess/Code/meteor/packages"
+export PACKAGE_DIRS="/Users/nhess/Code/meteor/packages"
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
 #Homebrew
 # Set PATH, MANPATH, etc., for Homebrew.
-eval "$(/opt/homebrew/bin/brew shellenv)"
-# Set PATH, MANPATH, etc., for Homebrew.
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/usr/local/bin/brew shellenv)"
 
 #PHP version
 export PATH=/usr/local/php5/bin:$PATH
@@ -126,14 +124,16 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
 
 # bun completions
-[ -s "/Users/nick.hess/.bun/_bun" ] && source "/Users/nick.hess/.bun/_bun"
+[ -s "/Users/nhess/.bun/_bun" ] && source "/Users/nhess/.bun/_bun"
 
 # Bun
-export BUN_INSTALL="/Users/nick.hess/.bun"
+export BUN_INSTALL="/Users/nhess/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Zoxide
-# eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh)"
 
 # N
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
