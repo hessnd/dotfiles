@@ -312,8 +312,6 @@ return {
   {
     "sindrets/diffview.nvim",
     lazy = true,
-    enabled = true,
-    event = "BufRead",
     config = function()
       require("plugins.git.diffview")
     end,

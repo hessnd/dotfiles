@@ -18,7 +18,6 @@ local on_attach = function(client, bufnr)
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
   require("lsp-inlayhints").on_attach(client, bufnr)
-  -- lsp_functions.enable_format_on_save(true)
 end
 
 local handlers = {

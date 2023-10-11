@@ -108,9 +108,24 @@ local normal_mode_mappings = {
     A = { '<cmd>!git add .<CR>', 'add all' },
     -- b = { '<cmd>lua require("internal.blame").open()<CR>', 'blame' },
     B = { '<cmd>Telescope git_branches<CR>', 'branches' },
-    d = { '<cmd>lua require("plugins.diffview").toggle_file_history()<CR>', 'diff file' },
-    s = { '<cmd>lua require("plugins.diffview").toggle_status()<CR>', 'status' },
-    S = { '<cmd>Telescope git_status<CR>', 'telescope status' },
+    c = {
+      name = 'Conflict',
+    },
+    h = {
+      name = 'Hunk',
+    },
+    -- d = { '<cmd>lua require("plugins.diffview").toggle_file_history()<CR>', 'diff file' },
+    -- s = { '<cmd>lua require("plugins.diffview").toggle_status()<CR>', 'status' },
+    s = { '<cmd>Telescope git_status<CR>', 'telescope status' },
+    w = {
+      name = 'Worktree',
+      w = 'worktrees',
+      c = 'create worktree',
+    }
+    -- S = { '<cmd>Telescope git_status<CR>', 'telescope status' },
+  },
+  r = {
+    name = 'Refactor',
   },
   s = {
     name = 'Search',

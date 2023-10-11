@@ -1,8 +1,6 @@
 -- Setup installer & lsp configs
-local typescript_ok, typescript = pcall(require, "typescript")
 local mason_ok, mason = pcall(require, "mason")
 local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
-local lsp_functions = require("lsp.functions")
 -- local ufo_config_handler = require("plugins.nvim-ufo").handler
 
 if not mason_ok or not mason_lsp_ok then
@@ -19,6 +17,7 @@ mason.setup({
 mason_lsp.setup({
   -- A list of servers to automatically install if they're not already installed
   ensure_installed = {
+    "bashls",
     "eslint",
     "graphql",
     "cssls",
@@ -31,6 +30,8 @@ mason_lsp.setup({
     "bashls",
     "kotlin_language_server",
     "svelte",
+    "astro",
+    "terraformls"
   },
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -116,7 +117,7 @@ lspconfig.yamlls.setup({
   settings = require("lsp.servers.yamlls").settings,
 })
 
-for _, server in ipairs({ "graphql", "bashls", "html", "kotlin_language_server", "svelte" }) do
+for _, server in ipairs({ "graphql", "bashls", "html", "kotlin_language_server", "svelte", "astro", "terraformls" }) do
   lspconfig[server].setup({
     on_attach = on_attach,
     capabilities = capabilities,

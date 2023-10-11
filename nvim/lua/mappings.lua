@@ -38,7 +38,6 @@ map("n", "<leader>b", "<cmd> new <CR>", { desc = "new buffer" })
 -- NvimTree
 map("n", "<C-n>", "<cmd> NvimTreeToggle <CR>")
 map("n", "<leader>e", "<cmd> NvimTreeFocus <CR>")
-map("n", "<leader>tt", "<cmd> NvimTreeFindFile <CR>")
 
 -- Comment
 map("n", "<leader>/", function() require("Comment.api").toggle.linewise.current() end)
@@ -72,9 +71,9 @@ map(
   { desc = "show keys" }
 )
 -- telescope git
-map(
-  "n",
-  "<leader>cm",
-  "<cmd>Telescope git_commits <CR>",
-  { desc = "git commits" }
-)
+-- map(
+--   "n",
+--   "<leader>cm",
+--   "<cmd>Telescope git_commits <CR>",
+--   { desc = "git commits" }
+-- )
