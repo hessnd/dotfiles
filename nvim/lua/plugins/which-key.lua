@@ -106,7 +106,7 @@ local normal_mode_mappings = {
     name = 'Git',
     a = { '<cmd>!git add %:p<CR>', 'add current' },
     A = { '<cmd>!git add .<CR>', 'add all' },
-    -- b = { '<cmd>lua require("internal.blame").open()<CR>', 'blame' },
+    b = { '<cmd>lua require("internal.blame").open()<CR>', 'blame' },
     B = { '<cmd>Telescope git_branches<CR>', 'branches' },
     c = {
       name = 'Conflict',
@@ -114,8 +114,14 @@ local normal_mode_mappings = {
     h = {
       name = 'Hunk',
     },
-    -- d = { '<cmd>lua require("plugins.diffview").toggle_file_history()<CR>', 'diff file' },
-    -- s = { '<cmd>lua require("plugins.diffview").toggle_status()<CR>', 'status' },
+    l = {
+      name = 'Log',
+      A = {'<cmd>lua require("plugins.telescope").my_git_commits()<CR>',  'commits (Telescope)'},
+      a = {'<cmd>LazyGitFilter<CR>',                                      'commits'},
+      C = {'<cmd>lua require("plugins.telescope").my_git_bcommits()<CR>', 'buffer commits (Telescope)'},
+      c = {'<cmd>LazyGitFilterCurrentFile<CR>',                           'buffer commits'},
+    },
+    m = { 'blame line' },
     s = { '<cmd>Telescope git_status<CR>', 'telescope status' },
     w = {
       name = 'Worktree',
@@ -157,10 +163,10 @@ local function attach_typescript(bufnr)
     c = {
       name = "LSP",
       e = { '<cmd>TSC<CR>', 'workspace errors (TSC)' },
-      F = { '<cmd>TypescriptFixAll<CR>', 'fix all' },
-      i = { '<cmd>TypescriptAddMissingImports<CR>', 'import all' },
-      o = { '<cmd>TypescriptOrganizeImports<CR>', 'organize imports' },
-      u = { '<cmd>TypescriptRemoveUnused<CR>', 'remove unused' },
+      F = { '<cmd>TSToolsFixAll<CR>', 'fix all' },
+      i = { '<cmd>TSToolsAddMissingImports<CR>', 'import all' },
+      o = { '<cmd>TSToolsOrganizeImports<CR>', 'organize imports' },
+      u = { '<cmd>TSToolsRemoveUnused<CR>', 'remove unused' },
     }
   }, {
     buffer = bufnr,

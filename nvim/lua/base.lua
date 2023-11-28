@@ -72,6 +72,9 @@ opt.whichwrap:append "<>[]hl"
 
 g.mapleader = ","
 
+-- TS context commentstring
+g.skip_ts_context_commentstring_module = true
+
 local default_providers = {
   "node",
   "python3",

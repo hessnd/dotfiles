@@ -41,14 +41,14 @@ local options = {
   -- autotag = {
   --   enable = true,
   -- },
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = true,
-    -- config = {
-    --   javascript = jsx_comment,
-    --   typescript = jsx_comment,
-    -- }
-  },
+  -- context_commentstring = {
+  --   enable = true,
+  --   enable_autocmd = true,
+  -- },
+}
+
+require('ts_context_commentstring').setup {
+  enable_autocmd = false,
 }
 
 -- local parser_config = require "nvim-treesitter.parsers".get_parser_configs()

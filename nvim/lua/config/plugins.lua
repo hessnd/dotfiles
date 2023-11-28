@@ -275,7 +275,6 @@ return {
   { "kylechui/nvim-surround", lazy = false, config = true },
   {
     "kevinhwang91/nvim-ufo",
-    enabled = false,
     dependencies = "kevinhwang91/promise-async",
     config = function()
       vim.keymap.set("n", "zR", require("ufo").openAllFolds)
@@ -439,12 +438,15 @@ return {
     end,
   },
 
-  -- use ({
-  --   'glepnir/lspsaga.nvim',
-  --   requires = { { 'nvim-tree/nvim-web-devicons'} }
-  -- })
-
   -- IDE Tools --
+  {
+    'folke/todo-comments.nvim',
+    lazy = false,
+    event = "BufEnter",
+    config = function()
+      require("plugins.todo-comments")
+    end,
+  },
   {
     'David-Kunz/jester',
     lazy = false,
