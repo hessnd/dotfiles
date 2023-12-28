@@ -15,6 +15,16 @@ return {
     'nvim-tree/nvim-web-devicons',
     config = function()
       require("nvim-web-devicons").setup({ default = true })
+      local icon, color = require("nvim-web-devicons").get_icon_color(".env", "env")
+      local _icon, cterm_color = require("nvim-web-devicons").get_icon_cterm_color(".env", "env")
+      require("nvim-web-devicons").set_icon({
+        [".env.local"] = {
+          icon = icon,
+          color = color,
+          cterm_color = cterm_color,
+          name = "env",
+        },
+      })
     end
   },
   -- Treesitter
