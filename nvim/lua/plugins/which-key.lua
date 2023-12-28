@@ -110,6 +110,11 @@ local normal_mode_mappings = {
     B = { '<cmd>Telescope git_branches<CR>', 'branches' },
     c = {
       name = 'Conflict',
+      b = { '<cmd>GitConflictChooseBoth<CR>', desc = 'choose both' },
+      n = { '<cmd>GitConflictNextConflict<CR>', desc = 'move to next conflict' },
+      o = { '<cmd>GitConflictChooseOurs<CR>',   desc = 'choose ours' },
+      p = { '<cmd>GitConflictPrevConflict<CR>', desc = 'move to prev conflict' },
+      t = { '<cmd>GitConflictChooseTheirs<CR>', desc = 'choose theirs' },
     },
     h = {
       name = 'Hunk',
@@ -127,8 +132,10 @@ local normal_mode_mappings = {
       name = 'Worktree',
       w = 'worktrees',
       c = 'create worktree',
-    }
-    -- S = { '<cmd>Telescope git_status<CR>', 'telescope status' },
+    },
+  },
+  m = {
+    name = "MultiCursors",
   },
   r = {
     name = 'Refactor',
@@ -141,8 +148,13 @@ local normal_mode_mappings = {
     H = { '<cmd>lua require("plugins.telescope").command_history()<CR>', 'command history' },
     s = { '<cmd>Telescope search_history theme=dropdown<CR>', 'search history' },
   },
+  z = {
+    name = 'UFO Folds',
+    R = { '<cmd>lua require("ufo").openAllFolds<CR>', 'open all folds' },
+    M = { '<cmd>lua require("ufo").closeAllFolds<CR>', 'close all folds' },
+    r = { '<cmd>lua require("ufo").openFoldsExceptKinds<CR>', 'open all folds except kinds' },
+  }
 }
-
 local visual_mode_mappings = {
   -- single
   ["s"] = { "<cmd>'<,'>sort<CR>", 'sort' },
