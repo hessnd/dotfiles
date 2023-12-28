@@ -32,6 +32,11 @@ require("typescript-tools").setup({
     end
   end,
   handlers = handlers,
+--   root_dir = require('lspconfig.util').root_pattern(".git", vim.fn.getcwd()),
+  -- root_dir = function()
+  --   return vim.fn.getcwd()
+  -- end,
+  root_dir = require('lspconfig.util').root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git", "tsconfig.common.json", vim.fn.getcwd()),
   settings = {
     separate_diagnostic_server = true,
     tsserver_file_preferences = {
@@ -39,6 +44,9 @@ require("typescript-tools").setup({
       includeCompletionsForModuleExports = true,
       quotePreference = "auto",
     },
+    tsserver_plugins = {
+      "@styled/typescript-styled-plugin",
+    }
   },
 })
 

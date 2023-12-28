@@ -13,6 +13,7 @@ nvimtree.setup({
   filters = {
     dotfiles = false,
     custom = { "^.git$" }, -- https://github.com/nvim-tree/nvim-tree.lua/wiki/Tips#hide-git-directory
+    exclude = { "^.env(..+)?$", ".env.local" },
   },
   disable_netrw = true,
   hijack_netrw = true,

@@ -33,7 +33,7 @@ M.settings = {
   useESLintClass = false,
   validate = "on",
   workingDirectory = {
-    mode = "location"
+    mode = "location" -- or auto
   }
 }
 

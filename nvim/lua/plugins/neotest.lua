@@ -6,9 +6,9 @@ end
 neotest.setup({
   adapters = {
     require("neotest-jest")({
-      jestCommand = "yarn test --",
+      jestCommand = "npx jest",
       jestConfigFile = "jest.config.js",
-      env = { CI = true },
+      env = { CI = false },
       cwd = function(path)
         return vim.fn.getcwd()
       end,

@@ -167,6 +167,7 @@ local function attach_typescript(bufnr)
       i = { '<cmd>TSToolsAddMissingImports<CR>', 'import all' },
       o = { '<cmd>TSToolsOrganizeImports<CR>', 'organize imports' },
       u = { '<cmd>TSToolsRemoveUnused<CR>', 'remove unused' },
+      r = { '<cmd>TSToolsFileReferences<CR>', 'find references' },
     }
   }, {
     buffer = bufnr,
@@ -182,15 +183,15 @@ local function attach_jest(bufnr)
   wk.register({
     j = {
       name = "Jest",
-      f = { '<cmd>lua require("jester").run_file()<CR>', 'run current file' },
-      n = { '<cmd>lua require("jester").run()<CR>', 'run nearest test' },
-      l = { '<cmd>lua require("jester").run_last()<CR>', 'run last test' },
-      -- f = { '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>', 'run current file' },
-      -- i = { '<cmd>lua require("neotest").summary.toggle()<CR>', 'toggle info panel' },
-      -- j = { '<cmd>lua require("neotest").run.run()<CR>', 'run nearest test' },
-      -- l = { '<cmd>lua require("neotest").run.run_last()<CR>', 'run last test' },
-      -- o = { '<cmd>lua require("neotest").output.open({ enter = true })<CR>', 'open test output' },
-      -- s = { '<cmd>lua require("neotest").run.stop()<CR>', 'stop' },
+      -- f = { '<cmd>lua require("jester").run_file()<CR>', 'run current file' },
+      -- n = { '<cmd>lua require("jester").run()<CR>', 'run nearest test' },
+      -- l = { '<cmd>lua require("jester").run_last()<CR>', 'run last test' },
+      f = { '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>', 'run current file' },
+      i = { '<cmd>lua require("neotest").summary.toggle()<CR>', 'toggle info panel' },
+      j = { '<cmd>lua require("neotest").run.run()<CR>', 'run nearest test' },
+      l = { '<cmd>lua require("neotest").run.run_last()<CR>', 'run last test' },
+      o = { '<cmd>lua require("neotest").output.open({ enter = true })<CR>', 'open test output' },
+      s = { '<cmd>lua require("neotest").run.stop()<CR>', 'stop' },
     }
   }, {
     buffer = bufnr,

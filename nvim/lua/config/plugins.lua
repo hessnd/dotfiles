@@ -81,7 +81,7 @@ return {
       { 'nvim-telescope/telescope-file-browser.nvim' },
       { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      { "nvim-telescope/telescope-fzf-native.nvim",  build = "make" },
       { "cljoly/telescope-repo.nvim" },
     },
   },
@@ -149,36 +149,13 @@ return {
       },
       {
         "zbirenbaum/copilot-cmp",
-        config = function ()
+        config = function()
           require("copilot_cmp").setup()
-        -- config = function()
-        --   require("copilot_cmp").setup({
-        --     formatters = {
-        --       insert_text = require('copilot_cmp.format').remove_existing
-        --     }
-        --   })
         end,
       },
+      "petertriho/cmp-git"
     },
   },
-
-  -- Formatters
-  -- {
-  --   "jose-elias-alvarez/null-ls.nvim",
-  --   event = "BufNewFile",
-  --   dependencies = { "mason.nvim" },
-  -- },
-  -- {
-  --   "jay-babu/mason-null-ls.nvim",
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   dependencies = {
-  --     "williamboman/mason.nvim",
-  --     "jose-elias-alvarez/null-ls.nvim",
-  --   },
-  --   config = function()
-  --     require("plugins.null-ls")
-  --   end,
-  -- },
 
   -- LSP addons
   {
@@ -371,6 +348,9 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     event = "VeryLazy",
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
     config = function()
       require('plugins.lualine')
     end,
@@ -412,13 +392,6 @@ return {
       require("plugins.blankline")
     end,
   },
-  {
-    'j-hui/fidget.nvim',
-    config = function()
-      require('fidget').setup()
-    end,
-  },
-
   -- Integrated Terminal --
   {
     'akinsho/toggleterm.nvim',
@@ -441,6 +414,7 @@ return {
   {
     'David-Kunz/jester',
     lazy = false,
+    enabled = false,
     config = function()
       require("plugins.jester")
     end,
@@ -482,7 +456,6 @@ return {
 
   {
     'nvim-neotest/neotest',
-    enabled = false,
     lazy = true,
     dependencies = {
       { 'nvim-lua/plenary.nvim' },
@@ -540,6 +513,37 @@ return {
         end
         return require("notify")(msg, ...)
       end
+    end,
+  },
+  {
+    'mrded/nvim-lsp-notify',
+    lazy = false,
+    dependencies = 'rcarriga/nvim-notify',
+    config = function()
+      require('lsp-notify').setup({
+        notify = require('notify'),
+      })
+    end
+  },
+  {
+    "j-hui/fidget.nvim",
+    lazy = false,
+    enabled = false,
+    dependencies = "rcarriga/nvim-notify",
+    config = function()
+      require('fidget').setup({
+        notification = {
+          window = {
+            winblend = 0,
+            border = "rounded",
+          },
+        },
+        integration = {
+          ["nvim-tree"] = {
+            enable = true, -- Integrate with nvim-tree/nvim-tree.lua (if installed)
+          },
+        },
+      })
     end,
   },
 }
