@@ -9,28 +9,6 @@ return {
       require("config.colorscheme")
     end,
   },
-  {
-    "navarasu/onedark.nvim",
-    lazy = false,
-    priority = 1000,
-    enabled = false,
-    config = function()
-      local onedark = require('onedark')
-      onedark.setup {
-        style = 'deep',
-        transparent = true,
-        term_colors = true,
-        lualine = {
-          transparent = false,
-        },
-        code_style = {
-          comments = 'italic',
-          keywords = 'italic',
-        }
-      }
-      onedark.load()
-    end
-  },
   { "nvim-lua/plenary.nvim" },
   -- UI --
   {
@@ -54,6 +32,24 @@ return {
     },
   },
   -- Navigating (Telescope/Tree/Refactor)
+  {
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    cmd = "Refactor",
+    keys = {
+      { "<leader>re", ":Refactor extract ",              mode = "x",          desc = "Extract function" },
+      { "<leader>rf", ":Refactor extract_to_file ",      mode = "x",          desc = "Extract function to file" },
+      { "<leader>rv", ":Refactor extract_var ",          mode = "x",          desc = "Extract variable" },
+      { "<leader>ri", ":Refactor inline_var",            mode = { "x", "n" }, desc = "Inline variable" },
+      { "<leader>rI", ":Refactor inline_func",           mode = "n",          desc = "Inline function" },
+      { "<leader>rb", ":Refactor extract_block",         mode = "n",          desc = "Extract block" },
+      { "<leader>rf", ":Refactor extract_block_to_file", mode = "n",          desc = "Extract block to file" },
+    },
+    config = true
+  },
   {
     "nvim-pack/nvim-spectre",
     lazy = true,
@@ -233,7 +229,56 @@ return {
       require("lsp-file-operations").setup()
     end
   },
+  -- General
+  { "AndrewRadev/switch.vim", lazy = false },
+  {
+    "Wansmer/treesj",
+    lazy = true,
+    cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
+    keys = {
+      { "gJ", "<cmd>TSJToggle<CR>", desc = "Toggle Split/Join" },
+    },
+    config = function()
+      require("treesj").setup({
+        use_default_keymaps = false,
+      })
+    end,
+  },
   { "tpope/vim-repeat",       lazy = false },
+  { "tpope/vim-speeddating", lazy = false },
+  {
+    "smoka7/multicursors.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'smoka7/hydra.nvim',
+    },
+    opts = {
+      hint_config = {
+        border = "rounded",
+        position = 'bottom',
+        show_name = false,
+      }
+    },
+    keys = {
+      {
+        '<LEADER>m',
+        '<CMD>MCstart<CR>',
+        desc = 'multicursor',
+      },
+      {
+        '<LEADER>m',
+        '<CMD>MCvisual<CR>',
+        mode = "v",
+        desc = 'multicursor',
+      },
+      {
+        '<C-Down>',
+        '<CMD>MCunderCursor<CR>',
+        desc = 'multicursor down',
+      },
+    },
+  },
   {
     "airblade/vim-rooter",
     setup = function()
@@ -346,6 +391,7 @@ return {
     end,
   },
   {
+    enabled = false,
     'nvim-lualine/lualine.nvim',
     event = "VeryLazy",
     dependencies = {
@@ -354,7 +400,6 @@ return {
     config = function()
       require('plugins.lualine')
     end,
-    enabled = false,
   },
   {
     "NvChad/nvim-colorizer.lua",
@@ -379,12 +424,20 @@ return {
   {
     'numToStr/Comment.nvim',
     lazy = false,
-    branch = "jsx",
+    dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
     config = function()
       require("plugins.comment")
     end,
   },
-  { 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Comment JSX properly
+  {
+    "LudoPinelli/comment-box.nvim",
+    lazy = false,
+    keys = {
+      { "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", desc = "comment box" },
+      { "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", mode = "v",          desc = "comment box" },
+    }
+  },
+  -- { 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Comment JSX properly
   {
     'lukas-reineke/indent-blankline.nvim',           -- indent blankline correctly
     lazy = true,
