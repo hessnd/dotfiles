@@ -64,11 +64,6 @@ local gls = gl.section
 
 local bgcolor = function()
   return nil;
-  -- if EcoVim.colorscheme == 'nightfly' then
-  --   return '#011627'
-  -- else
-  --   return nil;
-  -- end
 end
 
 -- Colours, maps and icons {{{2

@@ -255,7 +255,7 @@ return {
     end,
   },
   { "tpope/vim-repeat",       lazy = false },
-  { "tpope/vim-speeddating", lazy = false },
+  { "tpope/vim-speeddating",  lazy = false },
   {
     "smoka7/multicursors.nvim",
     event = "VeryLazy",
@@ -368,6 +368,7 @@ return {
     }
   },
   {
+    -- Install via homebrew: brew install jesseduffield/lazygit/lazygit
     "kdheepak/lazygit.nvim",
     cmd = {
       "LazyGit",
@@ -449,7 +450,7 @@ return {
   },
   -- { 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Comment JSX properly
   {
-    'lukas-reineke/indent-blankline.nvim',           -- indent blankline correctly
+    'lukas-reineke/indent-blankline.nvim', -- indent blankline correctly
     lazy = true,
     config = function()
       require("plugins.blankline")
@@ -589,24 +590,15 @@ return {
     end
   },
   {
-    "j-hui/fidget.nvim",
-    lazy = false,
-    enabled = false,
-    dependencies = "rcarriga/nvim-notify",
+    'windwp/nvim-ts-autotag',
+    ft = {
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
+    },
     config = function()
-      require('fidget').setup({
-        notification = {
-          window = {
-            winblend = 0,
-            border = "rounded",
-          },
-        },
-        integration = {
-          ["nvim-tree"] = {
-            enable = true, -- Integrate with nvim-tree/nvim-tree.lua (if installed)
-          },
-        },
-      })
+      require('nvim-ts-autotag').setup()
     end,
-  },
+  }
 }
