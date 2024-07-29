@@ -35,7 +35,7 @@ wk.setup {
   icons = {
     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
     separator = "➜", -- symbol used between a key and it's label
-    group = "+",      -- symbol prepended to a group
+    group = "+", -- symbol prepended to a group
   },
   window = {
     border = "rounded",       -- none, single, double, shadow, rounded
@@ -112,7 +112,7 @@ local normal_mode_mappings = {
       name = 'Conflict',
       b = { '<cmd>GitConflictChooseBoth<CR>', desc = 'choose both' },
       n = { '<cmd>GitConflictNextConflict<CR>', desc = 'move to next conflict' },
-      o = { '<cmd>GitConflictChooseOurs<CR>',   desc = 'choose ours' },
+      o = { '<cmd>GitConflictChooseOurs<CR>', desc = 'choose ours' },
       p = { '<cmd>GitConflictPrevConflict<CR>', desc = 'move to prev conflict' },
       t = { '<cmd>GitConflictChooseTheirs<CR>', desc = 'choose theirs' },
     },
@@ -121,10 +121,10 @@ local normal_mode_mappings = {
     },
     l = {
       name = 'Log',
-      A = {'<cmd>lua require("plugins.telescope").my_git_commits()<CR>',  'commits (Telescope)'},
-      a = {'<cmd>LazyGitFilter<CR>',                                      'commits'},
-      C = {'<cmd>lua require("plugins.telescope").my_git_bcommits()<CR>', 'buffer commits (Telescope)'},
-      c = {'<cmd>LazyGitFilterCurrentFile<CR>',                           'buffer commits'},
+      A = { '<cmd>lua require("plugins.telescope").my_git_commits()<CR>', 'commits (Telescope)' },
+      a = { '<cmd>LazyGitFilter<CR>', 'commits' },
+      C = { '<cmd>lua require("plugins.telescope").my_git_bcommits()<CR>', 'buffer commits (Telescope)' },
+      c = { '<cmd>LazyGitFilterCurrentFile<CR>', 'buffer commits' },
     },
     m = { 'blame line' },
     s = { '<cmd>Telescope git_status<CR>', 'telescope status' },
@@ -167,98 +167,159 @@ local visual_mode_mappings = {
 }
 
 
-wk.register(normal_mode_mappings, opts)
-wk.register(visual_mode_mappings, visual_opts)
+-- wk.register(normal_mode_mappings, opts)
+-- wk.register(visual_mode_mappings, visual_opts)
+
+local function attach_mappings(table, mode)
+  -- for loop to map normal_mode_mappings to wk.add syntax
+  for key, value in pairs(table) do
+    wk.add({
+      { "<leader>" .. key, group = value.name, mode = mode },
+    })
+    for k, v in pairs(value) do
+      if #v == 1 then
+        wk.add({
+          { "<leader>" .. key .. k, desc = v[1] , mode = mode }
+        })
+      else
+        wk.add({
+          { "<leader>" .. key .. k, v[1], desc = v[2], mode = mode }
+        })
+      end
+      if type(v) == 'table' and v.name then
+        for k1, v1 in pairs(v) do
+          wk.add({
+            { "<leader>" .. key .. k, group = v.name, mode = mode }
+          })
+          wk.add({
+          { "<leader>" .. key .. k .. k1, v1[1], desc = v1[2], mode = mode }
+          })
+        end
+      end
+    end
+  end
+end
+
+attach_mappings(normal_mode_mappings, "n")
+attach_mappings(visual_mode_mappings, "v")
 
 local function attach_typescript(bufnr)
-  wk.register({
-    c = {
-      name = "LSP",
-      e = { '<cmd>TSC<CR>', 'workspace errors (TSC)' },
-      F = { '<cmd>TSToolsFixAll<CR>', 'fix all' },
-      i = { '<cmd>TSToolsAddMissingImports<CR>', 'import all' },
-      o = { '<cmd>TSToolsOrganizeImports<CR>', 'organize imports' },
-      u = { '<cmd>TSToolsRemoveUnused<CR>', 'remove unused' },
-      r = { '<cmd>TSToolsFileReferences<CR>', 'find references' },
-    }
-  }, {
-    buffer = bufnr,
-    mode = "n",     -- NORMAL mode
-    prefix = "<leader>",
-    silent = true,  -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
+  wk.add({
+    { "<leader>c",  group = "LSP",                       desc = "LSP" },
+    { "<leader>ce", "<cmd>TSC<CR>",                      desc = "workspace errors (TSC)" },
+    { "<leader>cF", "<cmd>TSToolsFixAll<CR>",            desc = "fix all" },
+    { "<leader>ci", "<cmd>TSToolsAddMissingImports<CR>", desc = "import all" },
+    { "<leader>co", "<cmd>TSToolsOrganizeImports<CR>",   desc = "organize imports" },
+    { "<leader>cu", "<cmd>TSToolsRemoveUnused<CR>",      desc = "remove unused" },
+    { "<leader>cr", "<cmd>TSToolsFileReferences<CR>",    desc = "find references" },
   })
+  -- wk.register({
+  --   c = {
+  --     name = "LSP",
+  --     e = { '<cmd>TSC<CR>', 'workspace errors (TSC)' },
+  --     F = { '<cmd>TSToolsFixAll<CR>', 'fix all' },
+  --     i = { '<cmd>TSToolsAddMissingImports<CR>', 'import all' },
+  --     o = { '<cmd>TSToolsOrganizeImports<CR>', 'organize imports' },
+  --     u = { '<cmd>TSToolsRemoveUnused<CR>', 'remove unused' },
+  --     r = { '<cmd>TSToolsFileReferences<CR>', 'find references' },
+  --   }
+  -- }, {
+  --   buffer = bufnr,
+  --   mode = "n",     -- NORMAL mode
+  --   prefix = "<leader>",
+  --   silent = true,  -- use `silent` when creating keymaps
+  --   noremap = true, -- use `noremap` when creating keymaps
+  --   nowait = false, -- use `nowait` when creating keymaps
+  -- })
 end
 
 local function attach_jest(bufnr)
-  wk.register({
-    j = {
-      name = "Jest",
-      -- f = { '<cmd>lua require("jester").run_file()<CR>', 'run current file' },
-      -- n = { '<cmd>lua require("jester").run()<CR>', 'run nearest test' },
-      -- l = { '<cmd>lua require("jester").run_last()<CR>', 'run last test' },
-      f = { '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>', 'run current file' },
-      i = { '<cmd>lua require("neotest").summary.toggle()<CR>', 'toggle info panel' },
-      j = { '<cmd>lua require("neotest").run.run()<CR>', 'run nearest test' },
-      l = { '<cmd>lua require("neotest").run.run_last()<CR>', 'run last test' },
-      o = { '<cmd>lua require("neotest").output.open({ enter = true })<CR>', 'open test output' },
-      s = { '<cmd>lua require("neotest").run.stop()<CR>', 'stop' },
-    }
-  }, {
-    buffer = bufnr,
-    mode = "n",     -- NORMAL mode
-    prefix = "<leader>",
-    silent = true,  -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
+  wk.add({
+    { "<leader>j",  group = "Jest", desc = "Jest" },
+    { "<leader>ji", "<cmd>lua require('neotest').summary.toggle()<CR>", desc = "toggle info panel" },
+    { "<leader>jj", "<cmd>lua require('neotest').run.run()<CR>", desc = "run nearest test" },
+    { "<leader>jl", "<cmd>lua require('neotest').run.run_last()<CR>", desc = "run last test" },
+    { "<leader>jo", "<cmd>lua require('neotest').output.open({ enter = true })<CR>", desc = "open test output" },
+    { "<leader>js", "<cmd>lua require('neotest').run.stop()<CR>", desc = "stop" },
   })
+  -- wk.register({
+  --   j = {
+  --     name = "Jest",
+  --     f = { '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>', 'run current file' },
+  --     i = { '<cmd>lua require("neotest").summary.toggle()<CR>', 'toggle info panel' },
+  --     j = { '<cmd>lua require("neotest").run.run()<CR>', 'run nearest test' },
+  --     l = { '<cmd>lua require("neotest").run.run_last()<CR>', 'run last test' },
+  --     o = { '<cmd>lua require("neotest").output.open({ enter = true })<CR>', 'open test output' },
+  --     s = { '<cmd>lua require("neotest").run.stop()<CR>', 'stop' },
+  --   }
+  -- }, {
+  --   buffer = bufnr,
+  --   mode = "n",     -- NORMAL mode
+  --   prefix = "<leader>",
+  --   silent = true,  -- use `silent` when creating keymaps
+  --   noremap = true, -- use `noremap` when creating keymaps
+  --   nowait = false, -- use `nowait` when creating keymaps
+  -- })
 end
 
 local function attach_spectre(bufnr)
-  wk.register({
-    ["R"] = { '[SPECTRE] Replace all'},
-    ["o"] = { '[SPECTRE] Show options'},
-    ["q"] = { '[SPECTRE] Send all to quicklist'},
-    ["v"] = { '[SPECTRE] Change view mode'},
-  }, {
-    buffer = bufnr,
-    mode = "n", -- NORMAL mode
-    prefix = "<leader>",
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
+  wk.add({
+    { "<leader>R",  group = "Spectre", desc = "Spectre" },
+    { "<leader>o", "<cmd>Spectre<CR>", desc = "show options" },
+    { "<leader>q", "<cmd>SpectreSendToQuickfix<CR>", desc = "send all to quicklist" },
+    { "<leader>v", "<cmd>SpectreView<CR>", desc = "change view mode" },
   })
+  -- wk.register({
+  --   ["R"] = { '[SPECTRE] Replace all' },
+  --   ["o"] = { '[SPECTRE] Show options' },
+  --   ["q"] = { '[SPECTRE] Send all to quicklist' },
+  --   ["v"] = { '[SPECTRE] Change view mode' },
+  -- }, {
+  --   buffer = bufnr,
+  --   mode = "n",     -- NORMAL mode
+  --   prefix = "<leader>",
+  --   silent = true,  -- use `silent` when creating keymaps
+  --   noremap = true, -- use `noremap` when creating keymaps
+  --   nowait = false, -- use `nowait` when creating keymaps
+  -- })
 end
 
 local function attach_nvim_tree(bufnr)
-  wk.register({
-    ["="] = { "<cmd>NvimTreeResize +5<CR>", "resize +5" },
-    ["-"] = { "<cmd>NvimTreeResize -5<CR>", "resize +5" },
-  }, {
-    buffer = bufnr,
-    mode = "n",   -- NORMAL mode
-    prefix = "<leader>",
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
+  wk.add({
+    { "<leader>=", "<cmd>NvimTreeResize +5<CR>", desc = "resize +5" },
+    { "<leader>-", "<cmd>NvimTreeResize -5<CR>", desc = "resize -5" },
   })
+  -- wk.register({
+  --   ["="] = { "<cmd>NvimTreeResize +5<CR>", "resize +5" },
+  --   ["-"] = { "<cmd>NvimTreeResize -5<CR>", "resize +5" },
+  -- }, {
+  --   buffer = bufnr,
+  --   mode = "n",     -- NORMAL mode
+  --   prefix = "<leader>",
+  --   silent = true,  -- use `silent` when creating keymaps
+  --   noremap = true, -- use `noremap` when creating keymaps
+  --   nowait = false, -- use `nowait` when creating keymaps
+  -- })
 end
 
 local function attach_markdown(bufnr)
-  wk.register({
-    a = {
-      name = "Actions",
-      m = { '<cmd>MarkdownPreviewToggle<CR>', 'markdown preview' },
-    }
-  }, {
-    buffer = bufnr ,
-    mode = "n", -- NORMAL mode
-    prefix = "<leader>",
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
+  wk.add({
+    { "<leader>a",  group = "Actions", desc = "Actions" },
+    { "<leader>am", "<cmd>MarkdownPreviewToggle<CR>", desc = "markdown preview" },
   })
+  -- wk.register({
+  --   a = {
+  --     name = "Actions",
+  --     m = { '<cmd>MarkdownPreviewToggle<CR>', 'markdown preview' },
+  --   }
+  -- }, {
+  --   buffer = bufnr,
+  --   mode = "n",     -- NORMAL mode
+  --   prefix = "<leader>",
+  --   silent = true,  -- use `silent` when creating keymaps
+  --   noremap = true, -- use `noremap` when creating keymaps
+  --   nowait = false, -- use `nowait` when creating keymaps
+  -- })
 end
 
 return {

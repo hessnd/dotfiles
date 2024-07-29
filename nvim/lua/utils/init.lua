@@ -137,7 +137,7 @@ M.closeOtherBuffers = function()
     end)
   end
 end
-
+-- Is this necessary?
 function M.map(mode, keybind, rhs, opts)
   local options = { noremap = true }
   if opts then

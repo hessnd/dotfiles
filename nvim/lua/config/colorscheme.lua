@@ -15,10 +15,10 @@ tokyonight.setup({
   styles = {
     -- Style to be applied to different syntax groups
     -- Value is any valid attr-list value `:help attr-list`
-    comments = "italic",
-    keywords = "italic",
-    functions = "NONE",
-    variables = "NONE",
+    comments = { italic = true },
+    keywords = { italic = true },
+    functions = {},
+    variables = {},
     -- Background styles. Can be "dark", "transparent" or "normal"
     sidebars = "transparent", -- style for sidebars, see below
     floats = "transparent", -- style for floating windows
@@ -62,7 +62,7 @@ tokyonight.setup({
 })
 
 -- Set Colorscheme
-vim.cmd("colorscheme tokyonight")
+vim.cmd("colorscheme " .. "tokyonight")
 
 -- Ecovim Colors
 vim.api.nvim_set_hl(0, "EcovimPrimary", { fg = "#488dff" })
@@ -101,7 +101,7 @@ vim.api.nvim_set_hl(0, "StatusLine", { bg = "None" })
 vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "None" })
 vim.api.nvim_set_hl(0, "rainbowcol1", { fg = c.blue, ctermfg = 9 })
 vim.api.nvim_set_hl(0, "Boolean", { fg = "#F7768E" })
-vim.api.nvim_set_hl(0, "BufferOffset", { link = "EcovimSecondary" })
+-- vim.api.nvim_set_hl(0, "BufferOffset", { link = "EcovimSecondary" })
 
 -- Completion Menu Colors
 local highlights = {

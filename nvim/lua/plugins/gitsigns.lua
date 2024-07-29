@@ -4,11 +4,11 @@ local map = require("utils").map
 
 local options = {
   signs = {
-    add = { hl = "DiffAdd", text = "│", numhl = "GitSignsAddNr" },
-    change = { hl = "DiffChange", text = "│", numhl = "GitSignsChangeNr" },
-    delete = { hl = "DiffDelete", text = "", numhl = "GitSignsDeleteNr" },
-    topdelete = { hl = "DiffDelete", text = "‾", numhl = "GitSignsDeleteNr" },
-    changedelete = { hl = "DiffChangeDelete", text = "~", numhl = "GitSignsChangeNr" },
+    add = { text = "│",},
+    change = { text = "│" },
+    delete = { text = "" },
+    topdelete = { text = "‾" },
+    changedelete = { text = "~" },
   },
   on_attach = function()
     local gs = gitsigns
