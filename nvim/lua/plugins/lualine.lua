@@ -3,7 +3,7 @@ if (not status) then return end
 
 local options = {
   options = {
-    theme = 'onedark',
+    theme = 'tokyonight',
   },
   sections = {
     lualine_c = {

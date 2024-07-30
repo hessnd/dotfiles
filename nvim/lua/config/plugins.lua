@@ -159,8 +159,8 @@ return {
           require("copilot_cmp").setup()
         end,
       },
-      "petertriho/cmp-git",
-      "js-everts/cmp-tailwind-colors",
+      { "petertriho/cmp-git" },
+      { "js-everts/cmp-tailwind-colors" },
     },
   },
 
@@ -317,6 +317,7 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     event = "BufRead",
+    branch = "main",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("plugins.git.signs")
@@ -388,13 +389,68 @@ return {
   {
     'zbirenbaum/copilot.lua',
     cmd = "Copilot",
-    event = "InsertEnter",
+    lazy = false,
     config = function()
       require("copilot").setup({
         suggestion = { enabled = false },
         panel = { enabled = false },
       })
     end,
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    event = "VeryLazy",
+    opts = {
+      show_help = "no",
+      prompts = {
+        Explain = "Explain how it works.",
+        Review = "Review the following code and provide concise suggestions.",
+        Tests = "Briefly explain how the selected code works, then generate unit tests.",
+        Refactor = "Refactor the code to improve clarity and readability.",
+      },
+    },
+    build = function()
+      vim.defer_fn(function()
+        vim.cmd("UpdateRemotePlugins")
+        vim.notify("CopilotChat - Updated remote plugins. Please restart Neovim.")
+      end, 3000)
+    end,
+    keys = {
+      { "<leader>ccb",
+        function()
+          local input = vim.fn.input("Quick Chat: ")
+          if input ~= "" then
+            require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+          end
+        end,
+        desc = "CopilotChat - Buffer"
+      },
+      { "<leader>cco", "<cmd>CopilotChatOpen<cr>",      desc = "CopilotChat - Open" },
+      { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
+      { "<leader>cct", "<cmd>CopilotChatTests<cr>",   desc = "CopilotChat - Generate tests" },
+      -- {
+      --   "<leader>ccT",
+      --   "<cmd>CopilotChatVsplitToggle<cr>",
+      --   desc = "CopilotChat - Toggle Vsplit", -- Toggle vertical split
+      -- },
+      -- {
+      --   "<leader>ccv",
+      --   ":CopilotChatVisual",
+      --   mode = "x",
+      --   desc = "CopilotChat - Open in vertical split",
+      -- },
+      -- {
+      --   "<leader>ccc",
+      --   ":CopilotChatInPlace<cr>",
+      --   mode = { "n", "x" },
+      --   desc = "CopilotChat - Run in-place code",
+      -- },
+      {
+        "<leader>ccf",
+        "<cmd>CopilotChatFixDiagnostic<cr>", -- Get a fix for the diagnostic message under the cursor.
+        desc = "CopilotChat - Fix diagnostic",
+      },
+    }
   },
   {
     'onsails/lspkind-nvim',
@@ -526,7 +582,8 @@ return {
       { 'nvim-lua/plenary.nvim' },
       { 'nvim-treesitter/nvim-treesitter' },
       { 'antoinemadec/FixCursorHold.nvim' },
-      { 'haydenmeade/neotest-jest' }
+      { 'haydenmeade/neotest-jest' },
+      { 'nvim-neotest/nvim-nio' }
     },
     config = function()
       require("plugins.neotest")

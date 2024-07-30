@@ -29,19 +29,16 @@ local handlers = {
 
 require("typescript-tools").setup({
   on_attach = function(client, bufnr)
-    -- if vim.fn.has("nvim-0.10") then
-    --   -- Enable inlay hints
-    --   vim.lsp.inlay_hint(bufnr, true)
-    -- end
+    if vim.fn.has("nvim-0.10") then
+      -- Enable inlay hints
+      vim.lsp.inlay_hint.enable(bufnr, true)
+    end
   end,
   handlers = handlers,
---   root_dir = require('lspconfig.util').root_pattern(".git", vim.fn.getcwd()),
-  -- root_dir = function()
-  --   return vim.fn.getcwd()
-  -- end,
   root_dir = require('lspconfig.util').root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git", "tsconfig.common.json", vim.fn.getcwd()),
   settings = {
     separate_diagnostic_server = true,
+    code_lens = "off",
     tsserver_file_preferences = {
       includeInlayParameterNameHints = "all",
       includeCompletionsForModuleExports = true,

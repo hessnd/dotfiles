@@ -306,6 +306,10 @@ local function attach_markdown(bufnr)
   -- })
 end
 
+wk.add({
+  { "<leader>cc", group="Copilot Chat", desc = "Copilot Chat" }
+})
+
 return {
   attach_markdown = attach_markdown,
   attach_jest = attach_jest,
