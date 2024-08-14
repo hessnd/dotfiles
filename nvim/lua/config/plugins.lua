@@ -369,26 +369,6 @@ return {
       { "<Leader>gwc", desc = "create worktree" }
     }
   },
-  {
-    -- Install via homebrew: brew install jesseduffield/lazygit/lazygit
-    "kdheepak/lazygit.nvim",
-    cmd = {
-      "LazyGit",
-      "LazyGitCurrentFile",
-      "LazyGitFilterCurrentFile",
-      "LazyGitFilter",
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    keys = {
-      { "<Leader>gg", "<cmd>LazyGit<CR>", desc = "lazygit" },
-    },
-    config = function()
-      vim.g.lazygit_floating_window_scaling_factor = 0.9
-      vim.g.lazygit_floating_window_use_plenary = 1
-    end,
-  },
   -- Copilot
   {
     'zbirenbaum/copilot.lua',
