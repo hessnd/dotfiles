@@ -3,9 +3,6 @@ local baseDefinitionHandler = vim.lsp.handlers["textDocument/definition"]
 local filter = require("lsp.utils.filter").filter
 local filterReactDTS = require("lsp.utils.filterReactDTS").filterReactDTS
 
-local mason_registry = require('mason-registry')
-local tsserver_path = mason_registry.get_package('typescript-language-server'):get_install_path()
-
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     silent = true,
@@ -35,7 +32,11 @@ require("typescript-tools").setup({
     end
   end,
   handlers = handlers,
-  root_dir = require('lspconfig.util').root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git", "tsconfig.common.json", vim.fn.getcwd()),
+--   root_dir = require('lspconfig.util').root_pattern(".git", vim.fn.getcwd()),
+  -- root_dir = function()
+  --   return vim.fn.getcwd()
+  -- end,
+  root_dir = require('lspconfig.util').root_pattern("turbo.json", "tsconfig.json", "jsconfig.json", ".git", "tsconfig.common.json", vim.fn.getcwd()),
   settings = {
     separate_diagnostic_server = true,
     code_lens = "off",

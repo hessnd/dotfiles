@@ -7,7 +7,13 @@ neotest.setup({
   adapters = {
     require("neotest-jest")({
       jestCommand = "npx jest",
-      jestConfigFile = "jest.config.js",
+      jestConfigFile = function(file)
+        if string.find(file, "/apps/") then
+          return string.match(file, "(.-/[^/]+/)src") .. "jest.config.js"
+        end
+
+        return vim.fn.getcwd() .. "/jest.config.js"
+      end,
       env = { CI = false },
       cwd = function(path)
         return vim.fn.getcwd()

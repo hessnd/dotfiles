@@ -27,7 +27,6 @@ mason_lsp.setup({
     "lua_ls",
     "tailwindcss",
     "tsserver",
-    "bashls",
     "kotlin_language_server",
     "svelte",
     "astro",

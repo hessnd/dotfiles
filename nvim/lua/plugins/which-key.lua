@@ -196,25 +196,8 @@ local function attach_typescript(bufnr)
     { "<leader>co", "<cmd>TSToolsOrganizeImports<CR>",   desc = "organize imports" },
     { "<leader>cu", "<cmd>TSToolsRemoveUnused<CR>",      desc = "remove unused" },
     { "<leader>cr", "<cmd>TSToolsFileReferences<CR>",    desc = "find references" },
+    { "<leader>cs", "<cmd>TSToolsGoToSourceDefinition<CR>",    desc = "go to source definition" },
   })
-  -- wk.register({
-  --   c = {
-  --     name = "LSP",
-  --     e = { '<cmd>TSC<CR>', 'workspace errors (TSC)' },
-  --     F = { '<cmd>TSToolsFixAll<CR>', 'fix all' },
-  --     i = { '<cmd>TSToolsAddMissingImports<CR>', 'import all' },
-  --     o = { '<cmd>TSToolsOrganizeImports<CR>', 'organize imports' },
-  --     u = { '<cmd>TSToolsRemoveUnused<CR>', 'remove unused' },
-  --     r = { '<cmd>TSToolsFileReferences<CR>', 'find references' },
-  --   }
-  -- }, {
-  --   buffer = bufnr,
-  --   mode = "n",     -- NORMAL mode
-  --   prefix = "<leader>",
-  --   silent = true,  -- use `silent` when creating keymaps
-  --   noremap = true, -- use `noremap` when creating keymaps
-  --   nowait = false, -- use `nowait` when creating keymaps
-  -- })
 end
 
 local function attach_jest(bufnr)
@@ -222,28 +205,11 @@ local function attach_jest(bufnr)
     { "<leader>j",  group = "Jest", desc = "Jest" },
     { "<leader>ji", "<cmd>lua require('neotest').summary.toggle()<CR>", desc = "toggle info panel" },
     { "<leader>jj", "<cmd>lua require('neotest').run.run()<CR>", desc = "run nearest test" },
+    { "<leader>jf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", desc = "run file" },
     { "<leader>jl", "<cmd>lua require('neotest').run.run_last()<CR>", desc = "run last test" },
     { "<leader>jo", "<cmd>lua require('neotest').output.open({ enter = true })<CR>", desc = "open test output" },
     { "<leader>js", "<cmd>lua require('neotest').run.stop()<CR>", desc = "stop" },
   })
-  -- wk.register({
-  --   j = {
-  --     name = "Jest",
-  --     f = { '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>', 'run current file' },
-  --     i = { '<cmd>lua require("neotest").summary.toggle()<CR>', 'toggle info panel' },
-  --     j = { '<cmd>lua require("neotest").run.run()<CR>', 'run nearest test' },
-  --     l = { '<cmd>lua require("neotest").run.run_last()<CR>', 'run last test' },
-  --     o = { '<cmd>lua require("neotest").output.open({ enter = true })<CR>', 'open test output' },
-  --     s = { '<cmd>lua require("neotest").run.stop()<CR>', 'stop' },
-  --   }
-  -- }, {
-  --   buffer = bufnr,
-  --   mode = "n",     -- NORMAL mode
-  --   prefix = "<leader>",
-  --   silent = true,  -- use `silent` when creating keymaps
-  --   noremap = true, -- use `noremap` when creating keymaps
-  --   nowait = false, -- use `nowait` when creating keymaps
-  -- })
 end
 
 local function attach_spectre(bufnr)
@@ -273,17 +239,6 @@ local function attach_nvim_tree(bufnr)
     { "<leader>=", "<cmd>NvimTreeResize +5<CR>", desc = "resize +5" },
     { "<leader>-", "<cmd>NvimTreeResize -5<CR>", desc = "resize -5" },
   })
-  -- wk.register({
-  --   ["="] = { "<cmd>NvimTreeResize +5<CR>", "resize +5" },
-  --   ["-"] = { "<cmd>NvimTreeResize -5<CR>", "resize +5" },
-  -- }, {
-  --   buffer = bufnr,
-  --   mode = "n",     -- NORMAL mode
-  --   prefix = "<leader>",
-  --   silent = true,  -- use `silent` when creating keymaps
-  --   noremap = true, -- use `noremap` when creating keymaps
-  --   nowait = false, -- use `nowait` when creating keymaps
-  -- })
 end
 
 local function attach_markdown(bufnr)
@@ -291,19 +246,6 @@ local function attach_markdown(bufnr)
     { "<leader>a",  group = "Actions", desc = "Actions" },
     { "<leader>am", "<cmd>MarkdownPreviewToggle<CR>", desc = "markdown preview" },
   })
-  -- wk.register({
-  --   a = {
-  --     name = "Actions",
-  --     m = { '<cmd>MarkdownPreviewToggle<CR>', 'markdown preview' },
-  --   }
-  -- }, {
-  --   buffer = bufnr,
-  --   mode = "n",     -- NORMAL mode
-  --   prefix = "<leader>",
-  --   silent = true,  -- use `silent` when creating keymaps
-  --   noremap = true, -- use `noremap` when creating keymaps
-  --   nowait = false, -- use `nowait` when creating keymaps
-  -- })
 end
 
 wk.add({
