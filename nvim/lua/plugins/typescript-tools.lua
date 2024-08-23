@@ -26,10 +26,10 @@ local handlers = {
 
 require("typescript-tools").setup({
   on_attach = function(client, bufnr)
-    if vim.fn.has("nvim-0.10") then
-      -- Enable inlay hints
-      vim.lsp.inlay_hint.enable(bufnr, true)
-    end
+    -- if vim.fn.has("nvim-0.10") then
+    --   -- Enable inlay hints
+    --   vim.lsp.inlay_hint.enable(bufnr, true)
+    -- end
   end,
   handlers = handlers,
 --   root_dir = require('lspconfig.util').root_pattern(".git", vim.fn.getcwd()),

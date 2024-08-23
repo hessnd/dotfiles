@@ -52,8 +52,8 @@ local options = {
 }
 
 local globals = {
-  mapleader                   = ',',        --- Map leader key to SPC
-  maplocalleader              = ';',        --- Map local leader key to comma
+  mapleader                   = ',',        --- Map leader key to comma
+  maplocalleader              = ';',        --- Map local leader key to semicolon
   speeddating_no_mappings     = 1,          --- Disable default mappings for speeddating
   skip_ts_context_commentstring_module = true,  -- TS context commentstring
 }

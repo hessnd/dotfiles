@@ -27,6 +27,45 @@ return {
       })
     end
   },
+  {
+    'nvimdev/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require('dashboard').setup({
+        config = {
+          week_header = {
+            enable = true
+          },
+          shortcut = {
+            { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+            {
+              icon = ' ',
+              icon_hl = '@variable',
+              desc = 'Files',
+              group = 'Label',
+              action = 'Telescope find_files',
+              key = 'f',
+            },
+            {
+              icon = ' ',
+              icon_hl = '@variable',
+              desc = 'Grep',
+              group = 'Grep',
+              action = 'Telescope live_grep',
+              key = 'w',
+            },
+            {
+              desc = ' dotfiles',
+              group = 'Number',
+              action = 'Telescope dotfiles',
+              key = 'd',
+            },
+          }
+        }
+      })
+    end,
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+  },
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
@@ -143,7 +182,7 @@ return {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-calc",
       "saadparwaiz1/cmp_luasnip",
-      { "L3MON4D3/LuaSnip", dependencies = "rafamadriz/friendly-snippets" },
+      { "L3MON4D3/LuaSnip",             dependencies = "rafamadriz/friendly-snippets" },
       {
         "David-Kunz/cmp-npm",
         config = function()
@@ -400,7 +439,8 @@ return {
       end, 3000)
     end,
     keys = {
-      { "<leader>ccb",
+      {
+        "<leader>ccb",
         function()
           local input = vim.fn.input("Quick Chat: ")
           if input ~= "" then
@@ -409,7 +449,7 @@ return {
         end,
         desc = "CopilotChat - Buffer"
       },
-      { "<leader>cco", "<cmd>CopilotChatOpen<cr>",      desc = "CopilotChat - Open" },
+      { "<leader>cco", "<cmd>CopilotChatOpen<cr>",    desc = "CopilotChat - Open" },
       { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
       { "<leader>cct", "<cmd>CopilotChatTests<cr>",   desc = "CopilotChat - Generate tests" },
       -- {

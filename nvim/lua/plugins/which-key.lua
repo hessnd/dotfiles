@@ -47,24 +47,6 @@ wk.setup {
   triggers = { "<leader>" },                                                    -- or specify a list manually
 }
 
-local opts = {
-  mode = "n",     -- NORMAL mode
-  prefix = "<leader>",
-  buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true,  -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = false, -- use `nowait` when creating keymaps
-}
-
-local visual_opts = {
-  mode = "v",     -- NORMAL mode
-  prefix = "<leader>",
-  buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true,  -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = false, -- use `nowait` when creating keymaps
-}
-
 local normal_mode_mappings = {
   c = {
     name = 'LSP',
@@ -127,7 +109,7 @@ local normal_mode_mappings = {
   s = {
     name = 'Search',
     c = { '<cmd>Telescope colorscheme<CR>', 'color schemes' },
-    d = { '<cmd>lua require("plugins.telescope").edit_neovim()<CR>', 'dotfiles' },
+    d = { '<cmd>lua require("plugins.telescope").edit_neovim<CR>', 'dotfiles' },
     h = { '<cmd>Telescope oldfiles hidden=true<CR>', 'file history' },
     H = { '<cmd>lua require("plugins.telescope").command_history()<CR>', 'command history' },
     s = { '<cmd>Telescope search_history theme=dropdown<CR>', 'search history' },
