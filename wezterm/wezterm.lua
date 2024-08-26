@@ -6,7 +6,7 @@ config.color_scheme = 'Tokyo Night Storm'
 config.window_background_opacity = 0.9
 config.macos_window_background_blur = 20
 config.font = wezterm.font_with_fallback { 'OperatorMono Nerd Font' }
-config.font_size = 13.5
+config.font_size = 14.5
 config.font_rules = {
   -- For Bold-but-not-italic text, use this relatively bold font, and override
   -- its color to a tomato-red color to make bold text really stand out.
