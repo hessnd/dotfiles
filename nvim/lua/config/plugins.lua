@@ -363,7 +363,7 @@ return {
     end,
     keys = {
       { "<Leader>ghd", desc = "diff hunk" },
-      { "<Leader>ghp", desc = "preview" },
+      -- { "<Leader>ghp", desc = "preview" },
       { "<Leader>ghR", desc = "reset buffer" },
       { "<Leader>ghr", desc = "reset hunk" },
       { "<Leader>ghs", desc = "stage hunk" },
@@ -371,6 +371,22 @@ return {
       { "<Leader>ght", desc = "toggle deleted" },
       { "<Leader>ghu", desc = "undo stage" },
     }
+  },
+  {
+    'pwntester/octo.nvim',
+    lazy = false,
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require("octo").setup({
+        suppress_missing_scope = {
+          projects_v2 = true,
+        }
+      })
+    end
   },
   {
     "sindrets/diffview.nvim",

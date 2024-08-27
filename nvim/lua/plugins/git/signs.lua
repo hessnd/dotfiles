@@ -7,7 +7,7 @@ end
 -- │ Setup                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
 signs.setup {
-  signs                        = {
+  signs = {
     add          = { text = '▎' },
     change       = { text = '▎' },
     delete       = { text = '_' },
@@ -15,7 +15,7 @@ signs.setup {
     changedelete = { text = '~' },
     untracked    = { text = '┆' },
   },
-  signcolumn                   = true, -- Toggle with `:Gitsigns toggle_signs`
+  signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
   numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
   linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
   word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
@@ -44,10 +44,7 @@ signs.setup {
     row = 0,
     col = 1
   },
-  -- yadm                         = {
-  --   enable = false
-  -- },
-  on_attach                    = function(bufnr)
+  on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
     local function map(mode, l, r, opts)
@@ -88,4 +85,3 @@ signs.setup {
     map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
-

@@ -93,6 +93,11 @@ local normal_mode_mappings = {
       c = { '<cmd>LazyGitFilterCurrentFile<CR>', 'buffer commits' },
     },
     m = { 'blame line' },
+    p = {
+      name= "+Pull Request",
+      l = { "<cmd>Octo pr list<cr>", desc = "List PRs" },
+      m = { "<cmd>Octo search is:pr author:hessnd repo:pelotoncycle/jupiter state:open<cr>", desc = "List my open Jupiter Prs" },
+    },
     s = { '<cmd>Telescope git_status<CR>', 'telescope status' },
     w = {
       name = 'Worktree',
