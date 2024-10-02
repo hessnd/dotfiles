@@ -5,6 +5,9 @@ local silent = { silent = true }
 -- Clear highlights
 map("n", "<ESC>", "<cmd> noh <CR>")
 
+-- Fix moving forward in jumplist via <C-i>
+map("n", "<C-I>", "<C-I>")
+
 -- copy all
 map("n", "<C-c>", "<cmd> %y+ <CR>")
 
@@ -18,6 +21,13 @@ map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
 map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
+
+-- H to move to the first non-blank character of the line
+map("n", "H", "^")
+
+-- Move selected line / block of text in visual mode
+map("x", "K", ":move '<-2<CR>gv-gv")
+map("x", "J", ":move '>+1<CR>gv-gv")
 
 -- Splits
 map("n", "vv", "<cmd> :vsplit<CR>")
@@ -38,6 +48,14 @@ map("n", "<leader>b", "<cmd> new <CR>", { desc = "new buffer" })
 -- NvimTree
 map("n", "<C-n>", "<cmd> NvimTreeToggle <CR>")
 map("n", "<leader>e", "<cmd> NvimTreeFocus <CR>")
+
+-- Case change in visual mode
+map("v", "`", "u")
+map("v", "<A-`v", "U")
+
+-- Keep visual mode indenteting
+map("v", "<", "<gv")
+map("v", ">", ">gv")
 
 -- Comment
 map("n", "<leader>/", function() require("Comment.api").toggle.linewise.current() end)

@@ -26,7 +26,7 @@ mason_lsp.setup({
     "jsonls",
     "lua_ls",
     "tailwindcss",
-    "tsserver",
+    "ts_ls",
     "kotlin_language_server",
     "svelte",
     "astro",
