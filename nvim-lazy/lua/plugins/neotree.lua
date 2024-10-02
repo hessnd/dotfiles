@@ -3,6 +3,9 @@ return {
   opts = {
     filesystem = {
       bind_to_cwd = true,
+      filtered_items = {
+        hide_dotfiles = false,
+      },
     },
   },
 }

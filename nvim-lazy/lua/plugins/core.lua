@@ -16,11 +16,11 @@ return {
         sidebars = "transparent", -- style for sidebars, see below
         floats = "transparent", -- style for floating windows
       },
-      sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-      day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
-      hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-      dim_inactive = false, -- dims inactive windows
-      lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
+      -- sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+      -- day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+      -- hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+      -- dim_inactive = false, -- dims inactive windows
+      -- lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
       --- You can override specific color groups to use other groups or a hex color
       --- function will be called with a ColorScheme table
       on_colors = function(colors)
@@ -60,40 +60,4 @@ return {
       colorscheme = "tokyonight",
     },
   },
-  -- { import = "lazyvim.plugins.extras.lang.typescript" },
-
-  -- add more treesitter parsers
-  -- {
-  --
-  --   "nvim-treesitter/nvim-treesitter",
-  --   opts = {
-  --     ensure_installed = {
-  --       "bash",
-  --       "html",
-  --       "javascript",
-  --       "json",
-  --       "lua",
-  --       "markdown",
-  --       "markdown_inline",
-  --       "python",
-  --       "query",
-  --       "regex",
-  --       "tsx",
-  --       "typescript",
-  --       "vim",
-  --       "yaml",
-  --     },
-  --   },
-  -- },
-  -- {
-  --   "pmizio/typescript-tools.nvim",
-  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-  --   opts = {
-  --     settings = {
-  --       tsserver_plugins = {
-  --         "@styles/typescript-styled-plugin",
-  --       },
-  --     },
-  --   },
-  -- },
 }
