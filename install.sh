@@ -1,20 +1,16 @@
 set -e
 
 # Change shell to zsh
-chsh -s $(which zsh)
+chsh -s "$(which zsh)"
 
 echo -n "remove default files..."
-# rm $HOME/.vimrc
-rm $HOME/.zshrc
-# rm $HOME/.gitconfig
+rm "$HOME/.zshrc"
 
 echo -n "SymLinking dotfiles..."
-#Symlink .zshrc and .vimrc
-# ln -s $HOME/dotfiles/vimrc $HOME/.vimrc
-
-#mkdir $HOME/.vim/
-ln -s $HOME/dotfiles/zshrc $HOME/.zshrc
-# ln -s $HOME/dotfiles/git/gitconfig $HOME/.gitconfig
+ln -s "$HOME/dotfiles/zshrc" "$HOME/.zshrc"
+ln -s "$HOME/dotfiles/tmux" "$HOME/.config/tmux"
+ln -s "$HOME/dotfiles/lazygit" "$HOME/.config/lazygit"
+ln -s "$HOME/dotfiles/nvim-lazy" "$HOME/.config/nvim"
 
 echo -n "Setting italics in vim"
 tic xterm-256color-italic.terminfo
