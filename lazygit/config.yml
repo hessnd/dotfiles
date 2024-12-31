@@ -1,0 +1,5 @@
+gui:
+  showCommandLog: true
+
+os:
+  editPreset: "nvim"
