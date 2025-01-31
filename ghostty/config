@@ -5,3 +5,13 @@ background-opacity="0.9"
 background-blur-radius="10"
 shell-integration=zsh
 window-padding-y=0,0
+
+keybind = ctrl+a>shift+minus=new_split:right
+keybind = ctrl+a>minus=new_split:down
+keybind = ctrl+a>h=goto_split:left
+keybind = ctrl+a>l=goto_split:right
+keybind = ctrl+a>e=equalize_splits
+keybind = ctrl+a>r=reload_config
+
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+
