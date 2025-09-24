@@ -1,10 +1,25 @@
 # .dotfiles
+
 My dotfiles
 
-http://drewbarontini.com/setup/dotfiles/
+## Zed
 
-Fonts for Vim-Devicons - cd ~/Library/Fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
+Zed settings
 
-hybrid Vim - https://github.com/w0ng/vim-hybrid
+For information on how to configure Zed, see the Zed
+documentation: <https://zed.dev/docs/configuring-zed>
 
-Launch Vim and run :PluginInstall
+To see all of Zed's default settings without changing your
+custom settings, run the `open default settings` command
+from the command palette or from `Zed` application menu.
+
+Extra help from <https://github.com/jellydn/zed-101-setup>
+
+For TS:
+Refer to:
+
+- <https://zed.dev/docs/languages/javascript>
+- <https://zed.dev/docs/languages/typescript> for more info
+
+Refer to <https://github.com/jellydn/ts-inlay-hints> for how to
+setup for Neovim and VSCode

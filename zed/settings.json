@@ -1,0 +1,129 @@
+{
+  "context_servers": {
+    "mcp-server-github": {
+      "settings": {
+        "github_personal_access_token": ""
+      }
+    }
+  },
+  "icon_theme": "Monospace Icon Theme - Light",
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "agent": {
+    "always_allow_tool_actions": true,
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-thinking-latest"
+    },
+    "version": "2"
+  },
+  "theme": "Nightfox",
+  "vim_mode": true,
+  "ui_font_size": 14,
+  "buffer_font_size": 14,
+  "ui_font_family": "OperatorMono Nerd Font",
+  "buffer_font_family": "OperatorMono Nerd Font",
+  "experimental.theme_overrides": {
+    "syntax": {
+      "comment": {
+        "font_style": "italic"
+      }
+    }
+  },
+  "tab_size": 2,
+  "tab_bar": {
+    "show": true
+  },
+  "preferred_line_length": 80,
+  "soft_wrap": "none",
+  "vertical_scroll_margin": 0,
+  "inlay_hints": {
+    "enabled": true
+  },
+  "cursor_blink": false,
+  "vim": {
+    "use_system_clipboard": "always",
+    "use_multiline_find": true,
+    "enable_vim_sneak": true
+  },
+  "tabs": {
+    "show_diagnostics": "errors"
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware"
+  },
+  "centered_layout": {
+    "left_padding": 0.15,
+    "right_padding": 0.15
+  },
+  "lsp": {
+    "tailwindcss-language-server": {
+      "settings": {
+        "classAttributes": ["class", "className", "ngClass", "styles"]
+      }
+    },
+    "vtsls": {
+      "settings": {
+        "typescript": { "tsserver": { "maxTsServerMemory": 16184 } },
+        "javascript": { "tsserver": { "maxTsServerMemory": 16184 } }
+      }
+    }
+  },
+  "languages": {
+    "TypeScript": {
+      "inlay_hints": {
+        "enabled": true,
+        "show_parameter_hints": false,
+        "show_other_hints": true,
+        "show_type_hints": true
+      }
+    },
+    "Python": {
+      "format_on_save": { "language_server": { "name": "ruff" } },
+      "formatter": { "language_server": { "name": "ruff" } },
+      "language_servers": ["pyright", "ruff"]
+    }
+  },
+  "terminal": {
+    "font_family": "OperatorMono Nerd Font",
+    "env": {
+      "EDITOR": "zed --wait"
+    }
+  },
+  "file_scan_exclusions": [
+    "**/out",
+    "**/dist",
+    "**/.husky",
+    "**/.turbo",
+    "**/.vscode-test",
+    "**/.vscode",
+    "**/.next",
+    "**/.storybook",
+    "**/.tap",
+    "**/.nyc_output",
+    "**/report",
+    "**/node_modules"
+  ],
+  "project_panel": {
+    "button": true,
+    "dock": "left",
+    "git_status": true
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "notification_panel": {
+    "dock": "right"
+  },
+  "chat_panel": {
+    "dock": "right"
+  }
+}

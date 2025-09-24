@@ -1,8 +1,18 @@
-tt.*
-.tests
-doc/tags
-debug
-.repro
-foo.*
-*.log
-data
+ # Neovim, OS, and editor files to ignore
+ **/*.swp
+ **/*.swo
+ *~
+ .DS_Store
+ Thumbs.db
+ desktop.ini
+ # Python cache
+ __pycache__/
+ *.py[cod]
+ # Logs
+ *.log
+ # Pre-commit cache
+ .cache/
+ # Vim backup files
+ *.bak
+ # Node modules
+ node_modules/
