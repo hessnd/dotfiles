@@ -1,11 +1,4 @@
 {
-  "context_servers": {
-    "mcp-server-github": {
-      "settings": {
-        "github_personal_access_token": ""
-      }
-    }
-  },
   "icon_theme": "Monospace Icon Theme - Light",
   "features": {
     "edit_prediction_provider": "zed"
